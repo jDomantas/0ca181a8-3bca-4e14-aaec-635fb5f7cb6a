@@ -15,7 +15,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         private readonly Color HoverColor = Color.LightGray;
         private readonly Color ActiveColor = Color.Blue;
         private readonly Color InactiveColor = Color.Red;
-        private readonly int BarWidth = 6;
+        private readonly int BarWidth = 20;
 
         private Vector2 _position;
         private Vector2 _size;

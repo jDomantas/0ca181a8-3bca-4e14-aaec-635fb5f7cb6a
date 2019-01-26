@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DemoScene.cs" />
+    <Compile Include="DemoShipScene.cs" />
     <Compile Include="DemoUIScene.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Sim\SimTestScene.cs" />
