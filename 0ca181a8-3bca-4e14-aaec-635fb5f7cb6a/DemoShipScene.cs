@@ -76,7 +76,15 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 if (mouseState.LeftButton == ButtonState.Pressed)
                     if (world.Ships[i].area.Contains(mouseState.X, mouseState.Y))
                     {
-                            pressedOn = i;
+                        pressedOn = i;
+                            foreach (var button in buttons)
+                        {
+                            button.setOffset(mouseState.X, mouseState.Y);
+                        }
+                            foreach(var slider in sliders)
+                        {
+                            slider.setOffset(mouseState.X, mouseState.Y);
+                        }
                         break;
                     }
                     else

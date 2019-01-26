@@ -25,16 +25,21 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         private Button _hoveredBar;
         private ButtonState _prevState;
         private bool _isSliderHovered;
-
+        private int x, y;
         public UnholySlider(int x, int y, int w, int h, double maxPercentage)
         {
+            this.x = x;
+            this.y = y;
             _position = new Vector2(x, y);
             _size = new Vector2(w, h);
             _maxPercentage = maxPercentage;
             _bars = new List<Button>();
             _prevState = ButtonState.Released;
         }
-
+        public void setOffset(int offsetX, int offsetY)
+        {
+            _position = new Vector2(this.x + offsetX, this.y + offsetY);
+        }
         public void Update()
         {
             _clickedBar = null;

@@ -25,14 +25,19 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         public string Text { get; private set; }
         public bool IsHovered { get; private set; }
         public bool IsClicked { get; private set; }
-
+        private int x, y;
         public Button(int x, int y, int w, int h, string text = null)
         {
+            this.x = x;
+            this.y = y;
             Size = new Vector2(w, h);
             Coords = new Vector2(x, y);
             Text = text;
         }
-
+        public void setOffset(int offsetX, int offsetY)
+        {
+            Coords = new Vector2(this.x + offsetX, this.y + offsetY);
+        }
         public void Update()
         {
             var mouseState = Mouse.GetState();
