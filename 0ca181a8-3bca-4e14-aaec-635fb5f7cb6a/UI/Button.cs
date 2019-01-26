@@ -41,8 +41,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
             if(rect.Contains(mousePoint))
             {
                 IsHovered = true;
-                OnHover(this);
-                if (IsClicked && mouseState.LeftButton == ButtonState.Released) OnMouseUp(this);
+                OnHover?.Invoke(this);
+                if (IsClicked && mouseState.LeftButton == ButtonState.Released && OnMouseUp != null) OnMouseUp(this);
                 IsClicked = mouseState.LeftButton == ButtonState.Pressed;
             }
             else
