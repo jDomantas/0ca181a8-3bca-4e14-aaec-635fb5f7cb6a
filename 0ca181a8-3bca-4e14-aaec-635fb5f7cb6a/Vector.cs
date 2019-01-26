@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 {
+    [DebuggerDisplay("({" + nameof(X) + "}; {" + nameof(Y) + "})")]
     struct Vector
     {
         public double X { get; }
@@ -27,6 +29,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         public double Cross(Vector a) => X * a.Y - Y * a.X;
         public double Length => Math.Sqrt(X * X + Y * Y);
         public double LengthSquared => X * X + Y * Y;
+        public Vector Normalized => this / Length;
 
         public static Vector Zero => new Vector(0, 0);
         public static Vector UnitX => new Vector(1, 0);
