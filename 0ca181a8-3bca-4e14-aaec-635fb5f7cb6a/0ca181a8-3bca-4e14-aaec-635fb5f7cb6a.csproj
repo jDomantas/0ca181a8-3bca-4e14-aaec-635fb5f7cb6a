@@ -42,7 +42,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DemoScene.cs" />
+    <Compile Include="DemoUIScene.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Sim\SimTestScene.cs" />
     <Compile Include="IScene.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +57,8 @@
     <Compile Include="Sim\Ship.cs" />
     <Compile Include="Sim\World.cs" />
     <Compile Include="Vector.cs" />
+    <Compile Include="UI\Button.cs" />
+    <Compile Include="UI\UnholySlider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -14,12 +15,18 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            _graphics.PreferredBackBufferWidth = 1600;
+            _graphics.PreferredBackBufferHeight = 900;
+
+            Window.Position = new Point(
+                (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (_graphics.PreferredBackBufferWidth / 2),
+                (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (_graphics.PreferredBackBufferHeight / 2));
         }
 
         protected override void Initialize()
         {
             IsMouseVisible = true;
-            _currentScene = new DemoScene();
 
             base.Initialize();
         }
@@ -42,6 +49,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             Resources.Circle.SetData(colors);
 
             Resources.FontArial12 = Content.Load<SpriteFont>("font-arial-12");
+            _currentScene = new DemoUIScene();
         }
 
         protected override void Update(GameTime gameTime)
