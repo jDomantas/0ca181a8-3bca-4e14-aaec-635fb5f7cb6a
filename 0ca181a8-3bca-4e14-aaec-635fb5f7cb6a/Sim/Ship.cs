@@ -12,10 +12,14 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public Vector Velocity { get; private set; }
         public double Angle { get; private set; }
         public double RotationSpeed { get; private set; }
+        public PolygonHitbox Hitbox { get; }
+        public bool Alive { get; private set; }
 
-        public Ship(Vector position, Guid? uid = null)
+        public Ship(Vector position, PolygonHitbox hitbox, Guid? uid = null)
         {
+            Alive = true;
             Uid = uid ?? Guid.NewGuid();
+            Hitbox = hitbox;
             Position = position;
             Velocity = Vector.Zero;
             Angle = 0;
@@ -32,6 +36,17 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
             Angle += RotationSpeed * dt;
             RotationSpeed /= Math.Exp(dt * 4);
+
+            foreach (var ship in world.Ships)
+                if (!ReferenceEquals(ship, this) && Hitbox.IntersectsOther(ship.Hitbox, Position, Angle, ship.Position, ship.Angle))
+                {
+                    Kill();
+                    ship.Kill();
+                }
+
+            foreach (var planet in world.Planets)
+                if (Hitbox.IntersectsPlanet(planet, Position, Angle))
+                    Kill();
         }
 
         private void AddGravity(World world, double dt)
@@ -96,21 +111,29 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                 SpriteEffects.None,
                 0);
 
-            //var front = Position + Vector.AtAngle(Angle) * 30;
-            //sb.Draw(
-            //    Resources.Circle,
-            //    new Rectangle((int)front.X - 5, (int)front.Y - 5, 10, 10),
-            //    null,
-            //    Color.DarkBlue);
+            if (Microsoft.Xna.Framework.Input.Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Space))
+            {
+                sb.Draw(
+                    Resources.Circle,
+                    new Rectangle((int)Position.X - 2, (int)Position.Y - 2, 4, 4),
+                    Color.White);
+                Hitbox.DrawDebug(sb, Position, Angle);
+            }
+        }
+
+        private void Kill()
+        {
+            Alive = false;
         }
 
         public Ship Clone()
         {
-            return new Ship(Position, Uid)
+            return new Ship(Position, Hitbox, Uid)
             {
                 Velocity = Velocity,
                 Angle = Angle,
                 RotationSpeed = RotationSpeed,
+                Alive = Alive,
             };
         }
     }

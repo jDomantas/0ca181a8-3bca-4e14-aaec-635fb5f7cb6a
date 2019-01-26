@@ -30,6 +30,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         public double Length => Math.Sqrt(X * X + Y * Y);
         public double LengthSquared => X * X + Y * Y;
         public Vector Normalized => this / Length;
+        public Vector Translate(Vector xAxis) => X * xAxis + Y * new Vector(-xAxis.Y, xAxis.X);
 
         public static Vector Zero => new Vector(0, 0);
         public static Vector UnitX => new Vector(1, 0);

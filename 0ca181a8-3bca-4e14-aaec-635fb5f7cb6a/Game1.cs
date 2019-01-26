@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using System.Collections.Generic;
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 {
     class Game1 : Game, ISceneHost
@@ -53,14 +53,23 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
             Resources.FontArial12 = Content.Load<SpriteFont>("font-arial-12");
             Resources.PlayerShip = Content.Load<Texture2D>("good512");
+            Resources.EnemyShip = Content.Load<Texture2D>("bad512");
+            Resources.Planets = new List<Texture2D>(){
+                Content.Load<Texture2D>("Planet1-512"),
+                Content.Load<Texture2D>("Planet2-512"),
+                Content.Load<Texture2D>("Planet3-512"),
+                Content.Load<Texture2D>("Planet4-512"),
+                Content.Load<Texture2D>("Planet5-512"),
+                Content.Load<Texture2D>("Planet6-512")
+            };
 
             var world = new World();
-            world.Ships.Add(new Ship(new Vector(100, 100)));
-            world.Ships.Add(new Ship(new Vector(400, 150)));
-            world.Ships.Add(new Ship(new Vector(150, 400)));
+            world.Ships.Add(new Ship(new Vector(100, 100), PolygonHitbox.DefaultBox));
+            world.Ships.Add(new Ship(new Vector(400, 150), PolygonHitbox.DefaultBox));
+            world.Ships.Add(new Ship(new Vector(150, 400), PolygonHitbox.DefaultBox));
 
-            world.Planets.Add(new Planet(new Vector(600, 500), 100));
-
+            world.Planets.Add(new Planet(new Vector(600, 500), 100, 0));
+            world.Planets.Add(new Planet(new Vector(900, 800), 50, 1));
             _currentScene = new GameScene(this, world);
         }
 
