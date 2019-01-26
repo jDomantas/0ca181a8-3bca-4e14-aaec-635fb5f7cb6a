@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 {
@@ -10,5 +11,15 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         public static Texture2D PlayerShip;
         public static Texture2D EnemyShip;
         public static List<Texture2D> Planets;
+
+        public static void RemovePink(Texture2D tex)
+        {
+            var data = new Color[tex.Width * tex.Height];
+            tex.GetData(data);
+            for (int i = 0; i < data.Length; i++)
+                if (data[i].R == 255 && data[i].G == 0 && data[i].B == 255)
+                    data[i] = new Color(0, 0, 0, 0);
+            tex.SetData(data);
+        }
     }
 }
