@@ -12,10 +12,12 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public Vector Velocity { get; private set; }
         public double Angle { get; private set; }
         public double RotationSpeed { get; private set; }
+        public PolygonHitbox Hitbox { get; }
 
-        public Ship(Vector position, Guid? uid = null)
+        public Ship(Vector position, PolygonHitbox hitbox, Guid? uid = null)
         {
             Uid = uid ?? Guid.NewGuid();
+            Hitbox = hitbox;
             Position = position;
             Velocity = Vector.Zero;
             Angle = 0;
@@ -96,17 +98,19 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                 SpriteEffects.None,
                 0);
 
-            //var front = Position + Vector.AtAngle(Angle) * 30;
-            //sb.Draw(
-            //    Resources.Circle,
-            //    new Rectangle((int)front.X - 5, (int)front.Y - 5, 10, 10),
-            //    null,
-            //    Color.DarkBlue);
+            if (Microsoft.Xna.Framework.Input.Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Space))
+            {
+                sb.Draw(
+                    Resources.Circle,
+                    new Rectangle((int)Position.X - 2, (int)Position.Y - 2, 4, 4),
+                    Color.White);
+                Hitbox.DrawDebug(sb, Position, Angle);
+            }
         }
 
         public Ship Clone()
         {
-            return new Ship(Position, Uid)
+            return new Ship(Position, Hitbox, Uid)
             {
                 Velocity = Velocity,
                 Angle = Angle,

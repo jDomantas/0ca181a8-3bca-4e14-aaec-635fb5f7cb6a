@@ -66,9 +66,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
 
             var world = new World();
-            world.Ships.Add(new Ship(new Vector(100, 100)));
-            world.Ships.Add(new Ship(new Vector(400, 150)));
-            world.Ships.Add(new Ship(new Vector(150, 400)));
+            world.Ships.Add(new Ship(new Vector(100, 100), PolygonHitbox.DefaultBox));
+            world.Ships.Add(new Ship(new Vector(400, 150), PolygonHitbox.DefaultBox));
+            world.Ships.Add(new Ship(new Vector(150, 400), PolygonHitbox.DefaultBox));
 
             world.Planets.Add(new Planet(new Vector(600, 500), 100));
 
