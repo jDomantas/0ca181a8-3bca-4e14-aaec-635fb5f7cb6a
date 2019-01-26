@@ -22,15 +22,14 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         public event Action<Button> OnHover;
         public Vector2 Coords { get; private set; }
         public Vector2 Size { get; private set; }
-        public string Text { get; private set; }
         public bool IsHovered { get; private set; }
         public bool IsClicked { get; private set; }
 
-        public Button(int x, int y, int w, int h, string text = null)
+        public Button(int x, int y, int w)
         {
+            int h = w*505 / 841;
             Size = new Vector2(w, h);
             Coords = new Vector2(x, y);
-            Text = text;
         }
 
         public void Update()
@@ -54,13 +53,13 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
 
         public void Draw(SpriteBatch sb)
         {
-            var color = IsHovered ? (IsClicked ? ClickColor : HoverColor) : DefaultColor;
-            sb.Draw(Resources.Pixel, new Rectangle((int)Coords.X, (int)Coords.Y, (int)Size.X, (int)Size.Y), color);
-            if(Text != null)
+            if(!IsHovered)
             {
-                var textColor = IsHovered ? (IsClicked ? ClickTextColor : HoverTextColor) : DefaultTextColor;
-                var textSize = Resources.FontArial12.MeasureString(Text);
-                sb.DrawString(Resources.FontArial12, Text, Coords+Size/2-textSize/2, textColor);
+                sb.Draw(Resources.PlayButton, new Rectangle((int)Coords.X, (int)Coords.Y, (int)Size.X, (int)Size.Y), Color.White);
+            }
+            else
+            {
+                sb.Draw(Resources.PlayButtonHover, new Rectangle((int)Coords.X, (int)Coords.Y, (int)Size.X, (int)Size.Y), Color.White);
             }
         }
     }
