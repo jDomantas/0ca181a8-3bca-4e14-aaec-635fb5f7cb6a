@@ -19,7 +19,6 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         protected override void Initialize()
         {
             IsMouseVisible = true;
-            _currentScene = new DemoScene();
 
             base.Initialize();
         }
@@ -30,6 +29,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
             Resources.Pixel = new Texture2D(GraphicsDevice, 1, 1);
             Resources.Pixel.SetData(new[] { Color.White });
+
+            _currentScene = new DemoUIScene();
         }
 
         protected override void Update(GameTime gameTime)
