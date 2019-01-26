@@ -13,8 +13,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
     {
         private List<Button> buttons;
         private List<UnholySlider> sliders;
-        private SimTestScene world;
-        private bool isPressed = false;
+        private World world;
+        private int pressedOn = -1;
         public DemoShipScene()
         {
             buttons = new List<Button>()
@@ -28,13 +28,14 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 new UnholySlider(50, 50, 300, 20, 0.5),
                 new UnholySlider(50, 100, 300, 20, 0.5)
             };
-            world = new SimTestScene();
+            world = new World();
+            world.Ships.Add(new Ship(new Vector(200, 150)));
         }
 
         public void Draw(SpriteBatch sb)
         {
             sb.Begin();
-            if (isPressed)
+            if (pressedOn > -1)
             {
                 foreach (var button in buttons)
                 {
@@ -44,6 +45,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 {
                     slider.Draw(sb);
                 }
+                sb.DrawString(Resources.FontArial12, pressedOn.ToString(), new Vector2(210, 110), Color.White);
             }
             world.Draw(sb);
             //sb.Draw(Resources.Pixel, new Rectangle(100, 100, 100, 100), Color.Blue);
@@ -60,7 +62,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             {
                 slider.Update();
             }
-            world.Update();
+            world.Update(1 / 120.0);
         }
     }
 }
