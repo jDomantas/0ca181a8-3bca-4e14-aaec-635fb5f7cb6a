@@ -17,16 +17,16 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         private readonly Color InactiveColor = new Color(Color.Red, 0.5f);
         private readonly int BarWidth = 6;
 
-        public List<Tuple<double, double>> ActiveIntervals
+        public List<Interval> ActiveIntervals
         {
             get
             {
                 return _calcIntervals()
                         .Item1
-                        .Select(i => new Tuple<double, double>(
-                            (i.Item1 - _position.X) / _size.X,
-                            (i.Item2 - _position.X) / _size.X
-                        ))
+                        .Select(i => new Interval() {
+                            Start = (i.Item1 - _position.X) / _size.X,
+                            End = (i.Item2 - _position.X) / _size.X
+                        })
                         .ToList();
             }
         }
@@ -47,6 +47,15 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
             _maxPercentage = maxPercentage;
             _bars = new List<Button>();
             _prevState = ButtonState.Released;
+        }
+
+        public UnholySlider(int x, int y, int w, int h, double maxPercentage, List<double> intervals)
+            : this(x, y, w, h, maxPercentage)
+        {
+            _bars = intervals
+                    .Select(i => (int)(i * w + x))
+                    .Select(c => new Button(c - BarWidth / 2, (int)_position.Y, BarWidth, (int)_size.Y))
+                    .ToList();
         }
 
         public void Update()

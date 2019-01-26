@@ -57,6 +57,7 @@
     <Compile Include="Sim\Planet.cs" />
     <Compile Include="Sim\Ship.cs" />
     <Compile Include="Sim\World.cs" />
+    <Compile Include="UI\Interval.cs" />
     <Compile Include="Vector.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\UnholySlider.cs" />
