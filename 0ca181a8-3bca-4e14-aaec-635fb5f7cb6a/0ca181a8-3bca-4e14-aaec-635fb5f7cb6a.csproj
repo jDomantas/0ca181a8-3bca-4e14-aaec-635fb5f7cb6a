@@ -63,6 +63,7 @@
     <Compile Include="Sim\Planet.cs" />
     <Compile Include="Sim\Ship.cs" />
     <Compile Include="Sim\World.cs" />
+    <Compile Include="Textures\ShipModiel.cs" />
     <Compile Include="UI\Interval.cs" />
     <Compile Include="UI\ControlPopup.cs" />
     <Compile Include="Vector.cs" />
