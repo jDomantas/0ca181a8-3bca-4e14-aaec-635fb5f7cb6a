@@ -25,7 +25,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             sliders = new List<UnholySlider>()
             {
                 new UnholySlider(50, 50, 300, 20, 0.5),
-                new UnholySlider(50, 100, 300, 20, 0.5)
+                new UnholySlider(50, 100, 300, 20, 0.2)
             };
         }
 
