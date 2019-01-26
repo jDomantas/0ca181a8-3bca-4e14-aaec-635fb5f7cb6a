@@ -26,8 +26,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             };
             sliders = new List<UnholySlider>()
             {
-                new UnholySlider(50, 50, 300, 20, 0.5),
-                new UnholySlider(50, 100, 300, 20, 0.5)
+                new UnholySlider(50, 50, 300, 20, 0.5, new List<double>(){ 0.1, 0.3, 0.5})
             };
             world = new World();
             world.Ships.Add(new Ship(new Vector(200, 150)));
@@ -50,7 +49,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                     slider.Draw(sb);
                 }
             }
-            sb.DrawString(Resources.FontArial12, pressedOn.ToString(), new Vector2(410, 110), Color.White);
+            //sb.DrawString(Resources.FontArial12, pressedOn.ToString(), new Vector2(410, 110), Color.White);
             world.Draw(sb);
             //sb.Draw(Resources.Pixel, new Rectangle(100, 100, 100, 100), Color.Blue);
             sb.End();
@@ -83,7 +82,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                         }
                             foreach(var slider in sliders)
                         {
-                            slider.setOffset(mouseState.X, mouseState.Y);
+                            //slider.setOffset(mouseState.X, mouseState.Y);
                         }
                         break;
                     }
