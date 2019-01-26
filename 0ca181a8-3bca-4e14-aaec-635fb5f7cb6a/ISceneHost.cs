@@ -2,6 +2,8 @@
 {
     interface ISceneHost
     {
+        int ScreenWidth { get; }
+        int ScreenHeight { get; }
         void SetScene(IScene scene);
     }
 }

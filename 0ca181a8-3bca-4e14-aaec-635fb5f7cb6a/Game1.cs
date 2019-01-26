@@ -11,13 +11,16 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         public SpriteBatch _spriteBatch;
         public IScene _currentScene;
 
+        public int ScreenWidth => 1600;
+        public int ScreenHeight => 900;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            _graphics.PreferredBackBufferWidth = 1600;
-            _graphics.PreferredBackBufferHeight = 900;
+            _graphics.PreferredBackBufferWidth = ScreenWidth;
+            _graphics.PreferredBackBufferHeight = ScreenHeight;
 
             Window.Position = new Point(
                 (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (_graphics.PreferredBackBufferWidth / 2),
