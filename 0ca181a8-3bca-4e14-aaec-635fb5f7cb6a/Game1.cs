@@ -55,12 +55,12 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             Resources.PlayerShip = Content.Load<Texture2D>("good512");
             Resources.EnemyShip = Content.Load<Texture2D>("bad512");
             Resources.Planets = new List<Texture2D>(){
-                Content.Load<Texture2D>("Planet1"),
-                Content.Load<Texture2D>("Planet2"),
-                Content.Load<Texture2D>("Planet3"),
-                Content.Load<Texture2D>("Planet4"),
-                Content.Load<Texture2D>("Planet5"),
-                Content.Load<Texture2D>("Planet6")
+                Content.Load<Texture2D>("Planet1-512"),
+                Content.Load<Texture2D>("Planet2-512"),
+                Content.Load<Texture2D>("Planet3-512"),
+                Content.Load<Texture2D>("Planet4-512"),
+                Content.Load<Texture2D>("Planet5-512"),
+                Content.Load<Texture2D>("Planet6-512")
             };
 
 
