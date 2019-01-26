@@ -62,7 +62,20 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 Content.Load<Texture2D>("Planet5-512"),
                 Content.Load<Texture2D>("Planet6-512")
             };
-
+            Resources.BlueEngine = new List<Texture2D>(){
+                Content.Load<Texture2D>("blueng-512"),
+                Content.Load<Texture2D>("blueng1-512"),
+                Content.Load<Texture2D>("blueng2-512"),
+                Content.Load<Texture2D>("blueng3-512"),
+                Content.Load<Texture2D>("blueng4-512")
+            };
+            Resources.RedEngine = new List<Texture2D>(){
+                Content.Load<Texture2D>("redeng-512"),
+                Content.Load<Texture2D>("redeng1-512"),
+                Content.Load<Texture2D>("redeng2-512"),
+                Content.Load<Texture2D>("redeng3-512"),
+                Content.Load<Texture2D>("redeng4-512")
+            };
             var world = new World();
             world.Ships.Add(new Ship(new Vector(100, 100), PolygonHitbox.DefaultBox));
             world.Ships.Add(new Ship(new Vector(400, 150), PolygonHitbox.DefaultBox));
