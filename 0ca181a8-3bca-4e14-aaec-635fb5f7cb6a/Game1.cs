@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using System.Collections.Generic;
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 {
     class Game1 : Game, ISceneHost
@@ -53,6 +53,17 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
             Resources.FontArial12 = Content.Load<SpriteFont>("font-arial-12");
             Resources.PlayerShip = Content.Load<Texture2D>("good512");
+            Resources.EnemyShip = Content.Load<Texture2D>("bad512");
+            Resources.Planets = new List<Texture2D>(){
+                Content.Load<Texture2D>("Planet1"),
+                Content.Load<Texture2D>("Planet2"),
+                Content.Load<Texture2D>("Planet3"),
+                Content.Load<Texture2D>("Planet4"),
+                Content.Load<Texture2D>("Planet5"),
+                Content.Load<Texture2D>("Planet6")
+            };
+
+
 
             var world = new World();
             world.Ships.Add(new Ship(new Vector(100, 100)));
