@@ -5,19 +5,22 @@ using Microsoft.Xna.Framework.Input;
 
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 {
-    class Game1 : Game
+    class Game1 : Game, ISceneHost
     {
         public GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
         public IScene _currentScene;
+
+        public int ScreenWidth => 1600;
+        public int ScreenHeight => 900;
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            _graphics.PreferredBackBufferWidth = 1600;
-            _graphics.PreferredBackBufferHeight = 900;
+            _graphics.PreferredBackBufferWidth = ScreenWidth;
+            _graphics.PreferredBackBufferHeight = ScreenHeight;
 
             Window.Position = new Point(
                 (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (_graphics.PreferredBackBufferWidth / 2),
@@ -49,7 +52,15 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             Resources.Circle.SetData(colors);
 
             Resources.FontArial12 = Content.Load<SpriteFont>("font-arial-12");
-            _currentScene = new DemoUIScene();
+
+            var world = new World();
+            world.Ships.Add(new Ship(new Vector(100, 100)));
+            world.Ships.Add(new Ship(new Vector(400, 150)));
+            world.Ships.Add(new Ship(new Vector(150, 400)));
+
+            world.Planets.Add(new Planet(new Vector(600, 500), 100));
+
+            _currentScene = new GameScene(this, world);
         }
 
         protected override void Update(GameTime gameTime)
@@ -69,6 +80,11 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             _currentScene.Draw(_spriteBatch);
 
             base.Draw(gameTime);
+        }
+
+        public void SetScene(IScene scene)
+        {
+            _currentScene = scene;
         }
     }
 }
