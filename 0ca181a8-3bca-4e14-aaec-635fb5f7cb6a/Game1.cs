@@ -72,6 +72,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
             world.Planets.Add(new Planet(new Vector(600, 500), 100, 0));
             world.Planets.Add(new Planet(new Vector(900, 800), 50, 1));
+            world.Planets.Add(new Planet(new Vector(1100, 100), 50, 5));
+            world.Planets.Add(new Planet(new Vector(1900, 450), 500, 2));
             _currentScene = new GameScene(this, world);
         }
 

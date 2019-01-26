@@ -22,7 +22,12 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                 new Rectangle((int)(Position.X - Radius*1.7), (int)(Position.Y - Radius*1.7),
                 (int)(Radius * 3.4), (int)(Radius * 3.4)),
                 Color.White);
-            
+            /*sb.Draw(
+                Resources.Circle,
+                new Rectangle((int)(Position.X - Radius), (int)(Position.Y - Radius),
+                (int)(Radius * 2), (int)(Radius * 2)),
+                Color.Red * 0.5f);*/
+
         }
 
         public Planet Clone()
