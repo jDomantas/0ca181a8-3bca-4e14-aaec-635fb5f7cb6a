@@ -13,9 +13,11 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public double Angle { get; private set; }
         public double RotationSpeed { get; private set; }
         public PolygonHitbox Hitbox { get; }
+        public bool Alive { get; private set; }
 
         public Ship(Vector position, PolygonHitbox hitbox, Guid? uid = null)
         {
+            Alive = true;
             Uid = uid ?? Guid.NewGuid();
             Hitbox = hitbox;
             Position = position;
@@ -34,6 +36,17 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
             Angle += RotationSpeed * dt;
             RotationSpeed /= Math.Exp(dt * 4);
+
+            foreach (var ship in world.Ships)
+                if (!ReferenceEquals(ship, this) && Hitbox.IntersectsOther(ship.Hitbox, Position, Angle, ship.Position, ship.Angle))
+                {
+                    Kill();
+                    ship.Kill();
+                }
+
+            foreach (var planet in world.Planets)
+                if (Hitbox.IntersectsPlanet(planet, Position, Angle))
+                    Kill();
         }
 
         private void AddGravity(World world, double dt)
@@ -108,6 +121,11 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             }
         }
 
+        private void Kill()
+        {
+            Alive = false;
+        }
+
         public Ship Clone()
         {
             return new Ship(Position, Hitbox, Uid)
@@ -115,6 +133,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                 Velocity = Velocity,
                 Angle = Angle,
                 RotationSpeed = RotationSpeed,
+                Alive = Alive,
             };
         }
     }

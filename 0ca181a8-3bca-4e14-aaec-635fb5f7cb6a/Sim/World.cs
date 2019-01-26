@@ -28,6 +28,15 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                     contr = new EmptyShipController();
                 ship.Update(this, dt, contr);
             }
+
+            for (int i = Ships.Count - 1; i >= 0; i--)
+            {
+                if (!Ships[i].Alive)
+                {
+                    Ships[i] = Ships[Ships.Count - 1];
+                    Ships.RemoveAt(Ships.Count - 1);
+                }
+            }
         }
 
         public void Draw(SpriteBatch sb)

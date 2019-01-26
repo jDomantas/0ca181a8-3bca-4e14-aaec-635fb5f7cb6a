@@ -1,16 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Linq;
 
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 {
     class PolygonHitbox
     {
         public Vector[] Points { get; }
+        public double BoundingRadius { get; }
 
         public PolygonHitbox(params Vector[] points)
         {
             Points = points;
+            BoundingRadius = Points.Max(pt => pt.Length);
         }
 
         public bool IntersectsPlanet(Planet planet, Vector position, double rot)
@@ -27,6 +30,11 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
         public bool IntersectsOther(PolygonHitbox box, Vector myPos, double myRot, Vector otherPos, double otherRot)
         {
+            var dist = (myPos - otherPos).LengthSquared;
+            var distLim = BoundingRadius + box.BoundingRadius;
+            if (dist > distLim * distLim)
+                return false;
+
             var xAxis1 = Vector.AtAngle(myRot);
             var xAxis2 = Vector.AtAngle(otherRot);
 
@@ -54,9 +62,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             p /= q;
             if (p < 0 || p > 1) return false;
 
-            p = (a - c).Cross(b - a);
-            p /= q;
-            if (p < 0 || p > 1) return false;
+            var r = (b - a).Cross(a - c);
+            r /= q;
+            if (r < 0 || r > 1) return false;
 
             return true;
         }

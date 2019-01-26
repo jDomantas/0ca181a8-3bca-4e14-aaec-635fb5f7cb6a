@@ -63,8 +63,6 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 Content.Load<Texture2D>("Planet6-512")
             };
 
-
-
             var world = new World();
             world.Ships.Add(new Ship(new Vector(100, 100), PolygonHitbox.DefaultBox));
             world.Ships.Add(new Ship(new Vector(400, 150), PolygonHitbox.DefaultBox));
