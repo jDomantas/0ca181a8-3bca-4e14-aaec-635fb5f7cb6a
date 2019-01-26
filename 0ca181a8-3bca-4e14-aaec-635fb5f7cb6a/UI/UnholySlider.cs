@@ -13,9 +13,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
     {
         private readonly Color DefaultColor = Color.White;
         private readonly Color HoverColor = Color.LightGray;
-        private readonly Color ActiveColor = Color.Blue;
-        private readonly Color InactiveColor = Color.Red;
-        private readonly int BarWidth = 20;
+        private readonly Color ActiveColor = new Color(Color.Green, 0.5f);
+        private readonly Color InactiveColor = new Color(Color.Red, 0.5f);
+        private readonly int BarWidth = 6;
 
         private Vector2 _position;
         private Vector2 _size;
@@ -60,6 +60,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
                     bar.OnMouseUp += b => _clickedBar = b;
                     bar.OnHover += b => _hoveredBar = b;
                     _bars.Add(bar);
+                    _bars = _bars.OrderBy(x => x.Coords.X).ToList();
                 }
                 _prevState = mouseState.LeftButton;
             }
@@ -84,7 +85,24 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
 
         private void _drawActivity(SpriteBatch sb)
         {
-
+            int availableLen = (int)(_maxPercentage * _size.X);
+            for(int i = 0; i < _bars.Count; i+=2)
+            {
+                int len;
+                if (i == _bars.Count-1)
+                {
+                    len = (int)(_position.X + _size.X - (_bars[i].Coords.X+BarWidth/2));
+                }
+                else
+                {
+                    len = (int)(_bars[i + 1].Coords.X - _bars[i].Coords.X);
+                }
+                int greenLen = Math.Min(len, availableLen);
+                int redLen = Math.Max(0, len - greenLen);
+                availableLen -= greenLen;
+                sb.Draw(Resources.Pixel, new Rectangle((int)(_bars[i].Coords.X + BarWidth / 2), (int)_position.Y, greenLen, (int)_size.Y), ActiveColor);
+                sb.Draw(Resources.Pixel, new Rectangle((int)(_bars[i].Coords.X + BarWidth / 2 + greenLen), (int)_position.Y, redLen, (int)_size.Y), InactiveColor);
+            }
         }
 
         private bool _updateBars(out Button pressedBar)
