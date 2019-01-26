@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 {
     class Planet
@@ -8,7 +7,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public Vector Position { get; }
         public double Radius { get; }
         public int planetIndex;
-        public Planet(Vector position, double radius, int planetIndex = 2 )
+        public Planet(Vector position, double radius, int planetIndex = 0)
         {
             Position = position;
             Radius = radius;
@@ -28,7 +27,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
         public Planet Clone()
         {
-            return new Planet(Position, Radius);
+            return new Planet(Position, Radius, planetIndex);
         }
     }
 }

@@ -70,8 +70,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             world.Ships.Add(new Ship(new Vector(400, 150)));
             world.Ships.Add(new Ship(new Vector(150, 400)));
 
-            world.Planets.Add(new Planet(new Vector(600, 500), 100));
-
+            world.Planets.Add(new Planet(new Vector(600, 500), 100, 0));
+            world.Planets.Add(new Planet(new Vector(900, 800), 50, 1));
             _currentScene = new GameScene(this, world);
         }
 
