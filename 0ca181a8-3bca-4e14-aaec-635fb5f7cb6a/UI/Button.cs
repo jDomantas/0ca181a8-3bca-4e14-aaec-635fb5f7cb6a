@@ -22,12 +22,19 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         public event Action<Button> OnHover;
         public Vector2 Coords { get; private set; }
         public Vector2 Size { get; private set; }
+        public Texture2D Texture { get; }
+        public Texture2D TextureHover { get; }
         public bool IsHovered { get; private set; }
         public bool IsClicked { get; private set; }
 
-        public Button(int x, int y, int w)
+        public Button(Texture2D texture, Texture2D textureHover, int x, int y, int w)
+            : this(texture, textureHover, x, y, w, w * texture.Height / texture.Width)
+        { }
+
+        public Button(Texture2D texture, Texture2D textureHover, int x, int y, int w, int h)
         {
-            int h = w*505 / 841;
+            Texture = texture;
+            TextureHover = textureHover;
             Size = new Vector2(w, h);
             Coords = new Vector2(x, y);
         }
@@ -55,11 +62,11 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         {
             if(!IsHovered)
             {
-                sb.Draw(Resources.PlayButton, new Rectangle((int)Coords.X, (int)Coords.Y, (int)Size.X, (int)Size.Y), Color.White);
+                sb.Draw(Texture, new Rectangle((int)Coords.X, (int)Coords.Y, (int)Size.X, (int)Size.Y), Color.White);
             }
             else
             {
-                sb.Draw(Resources.PlayButtonHover, new Rectangle((int)Coords.X, (int)Coords.Y, (int)Size.X, (int)Size.Y), Color.White);
+                sb.Draw(TextureHover, new Rectangle((int)Coords.X, (int)Coords.Y, (int)Size.X, (int)Size.Y), Color.White);
             }
         }
     }

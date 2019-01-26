@@ -25,7 +25,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
             _commands = new Dictionary<Guid, ShipCommands>();
 
-            _previewButton = new Button(5, 5, 100);
+            _previewButton = new Button(Resources.PlayButton, Resources.PlayButtonHover, 5, 5, 100);
             _previewButton.OnMouseUp += OnPreview;
         }
 
