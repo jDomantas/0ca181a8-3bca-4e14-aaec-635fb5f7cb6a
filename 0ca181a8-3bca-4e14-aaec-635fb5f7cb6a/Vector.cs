@@ -34,5 +34,6 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         public static Vector Zero => new Vector(0, 0);
         public static Vector UnitX => new Vector(1, 0);
         public static Vector UnitY => new Vector(0, 1);
+        public static Vector AtAngle(double angle) => new Vector(Math.Cos(angle), Math.Sin(angle));
     }
 }
