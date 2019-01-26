@@ -19,7 +19,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             //_world.Ships.Add(new Ship(new Vector(550, 380)));
         }
 
-        public void Update(ISceneHost host)
+        public void Update()
         {
             _world.Update(1 / 60.0, new Dictionary<Guid, IShipController>());
         }

@@ -58,6 +58,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             world.Ships.Add(new Ship(new Vector(400, 150)));
             world.Ships.Add(new Ship(new Vector(150, 400)));
 
+            world.Planets.Add(new Planet(new Vector(600, 500), 100));
+
             _currentScene = new GameScene(this, world);
         }
 
@@ -66,7 +68,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            _currentScene.Update(this);
+            _currentScene.Update();
 
             base.Update(gameTime);
         }

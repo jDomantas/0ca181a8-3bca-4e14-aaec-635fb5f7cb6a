@@ -32,10 +32,10 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         private void OnPreview(Button obj)
         {
             var controllers = _commands.ToDictionary(c => c.Key, c => (IShipController)new PlayerShipController(c.Value));
-            _host.SetScene(new PreviewScene(this, _turnStart.Clone(), controllers));
+            _host.SetScene(new PreviewScene(_host, this, _turnStart.Clone(), controllers));
         }
 
-        public void Update(ISceneHost host)
+        public void Update()
         {
             _popup?.Update();
 
