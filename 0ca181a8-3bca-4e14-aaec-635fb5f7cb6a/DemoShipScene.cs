@@ -7,6 +7,7 @@ using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim;
+using Microsoft.Xna.Framework.Input;
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 {
     class DemoShipScene : IScene
@@ -54,6 +55,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
         public void Update()
         {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+
             foreach (var button in buttons)
             {
                 button.Update();
@@ -63,6 +67,43 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 slider.Update();
             }
             world.Update(1 / 120.0);
+
+            foreach (var ship in world.Ships)
+            {
+
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                    if (ship.area.Contains(mouseState.X, mouseState.Y))
+                    {
+                            pressedOn = 1;
+                    }
+                    else
+                    {
+                            pressedOn = -1;
+                    }
+            }
         }
     }
 }
+
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * STOP READING MY CODE!
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */

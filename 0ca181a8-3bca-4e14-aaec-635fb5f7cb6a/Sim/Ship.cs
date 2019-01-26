@@ -10,7 +10,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public Vector Velocity { get; private set; }
         public double Angle { get; private set; }
         public double RotationSpeed { get; private set; }
-
+        public Rectangle area;
         public Ship(Vector position)
         {
             Position = position;
@@ -48,7 +48,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public void Draw(SpriteBatch sb)
         {
             const int Size = 30;
-
+            area = new Rectangle((int)Position.X - Size, (int)Position.Y - Size, Size * 2, Size * 2);
             sb.Draw(
                 Resources.Pixel,
                 new Rectangle((int)Position.X, (int)Position.Y, Size * 2, Size * 2),
