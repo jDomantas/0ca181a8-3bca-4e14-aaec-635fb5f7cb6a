@@ -46,7 +46,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="GameScene.cs" />
     <Compile Include="ISceneHost.cs" />
-    <Compile Include="Textures\ParšelTexture.cs" />
+    <Compile Include="Textures\TexturePart.cs" />
     <Compile Include="PreviewScene.cs" />
     <Compile Include="ShipCommands.cs" />
     <Compile Include="Sim\Controllers\EmptyShipController.cs" />
@@ -63,7 +63,7 @@
     <Compile Include="Sim\Planet.cs" />
     <Compile Include="Sim\Ship.cs" />
     <Compile Include="Sim\World.cs" />
-    <Compile Include="Textures\ShipModiel.cs" />
+    <Compile Include="Textures\ShipModel.cs" />
     <Compile Include="UI\Interval.cs" />
     <Compile Include="UI\ControlPopup.cs" />
     <Compile Include="Vector.cs" />
