@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim.Controllers;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,7 +22,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public void Update(double dt)
         {
             foreach (var ship in Ships)
-                ship.Update(this, dt);
+                ship.Update(this, dt, new KeyboardShipController());
         }
 
         public void Draw(SpriteBatch sb)
