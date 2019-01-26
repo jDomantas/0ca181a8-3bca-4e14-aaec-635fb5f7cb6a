@@ -86,13 +86,22 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                 new Vector2(0.5f, 0.5f),
                 SpriteEffects.None,
                 0);
-
-            var front = Position + Vector.AtAngle(Angle) * 30;
             sb.Draw(
-                Resources.Circle,
-                new Rectangle((int)front.X - 5, (int)front.Y - 5, 10, 10),
+                Resources.PlayerShip,
+                new Rectangle((int)Position.X, (int)Position.Y, Size * 2, Size * 2),
                 null,
-                Color.DarkBlue);
+                Color.White,
+                (float)(Angle+Math.PI/2),
+                new Vector2(243, 215),
+                SpriteEffects.None,
+                0);
+
+            //var front = Position + Vector.AtAngle(Angle) * 30;
+            //sb.Draw(
+            //    Resources.Circle,
+            //    new Rectangle((int)front.X - 5, (int)front.Y - 5, 10, 10),
+            //    null,
+            //    Color.DarkBlue);
         }
 
         public Ship Clone()
