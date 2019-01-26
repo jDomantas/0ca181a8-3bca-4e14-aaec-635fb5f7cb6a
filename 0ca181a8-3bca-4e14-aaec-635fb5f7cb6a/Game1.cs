@@ -81,6 +81,12 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             };
             Resources.PlayButton = Content.Load<Texture2D>("Bottoms/play1");
             Resources.PlayButtonHover = Content.Load<Texture2D>("Bottoms/play2");
+            Resources.Slider = Content.Load<Texture2D>("Bottoms/slider");
+            Resources.SliderHover = Content.Load<Texture2D>("Bottoms/slider_highlight");
+            Resources.UIBackground = Content.Load<Texture2D>("Bottoms/ui_base");
+            Resources.LeftLabel = Content.Load<Texture2D>("Bottoms/left");
+            Resources.RightLabel = Content.Load<Texture2D>("Bottoms/right");
+            Resources.WeaponsLabel = Content.Load<Texture2D>("Bottoms/weapons");
             var world = new World();
             world.Ships.Add(new Ship(new Vector(100, 100), Models.RedModel));
             //world.Ships.Add(new Ship(new Vector(400, 150), Models.BlueModel));

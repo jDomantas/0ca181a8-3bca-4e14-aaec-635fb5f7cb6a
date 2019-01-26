@@ -7,6 +7,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
 {
     class ControlPopup
     {
+        private const int LabelMargin = 50;
         public Guid ShipId { get; }
         private readonly UnholySlider _leftEngineSlider;
         private readonly UnholySlider _rightEngineSlider;
@@ -18,8 +19,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         public ControlPopup(Ship ship, int x, int y, int width, int height, ShipCommands startCommands)
         {
             ShipId = ship.Uid;
-            _leftEngineSlider = new UnholySlider(x + 10, y + 10, width - 20, 20, 0.5, startCommands.LeftEngineToggles);
-            _rightEngineSlider = new UnholySlider(x + 10, y + 40, width - 20, 20, 0.5, startCommands.RightEngineToggles);
+            _leftEngineSlider = new UnholySlider(x + LabelMargin, y + 10, width - 20 - LabelMargin, 20, 0.5, startCommands.LeftEngineToggles);
+            _rightEngineSlider = new UnholySlider(x + LabelMargin, y + 40, width - 20 - LabelMargin, 20, 0.5, startCommands.RightEngineToggles);
             _x = x;
             _y = y;
             _width = width;
@@ -47,10 +48,15 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(
-                Resources.Pixel,
+                Resources.UIBackground,
                 new Rectangle(_x, _y, _width, _height),
-                Color.Gray);
-
+                Color.White);
+            sb.Draw(Resources.LeftLabel,
+                new Rectangle(_x + 15, _y + 10, 20, 20),
+                Color.White);
+            sb.Draw(Resources.RightLabel,
+                new Rectangle(_x + 15, _y + 40, 20, 20),
+                Color.White);
             _leftEngineSlider.Draw(sb);
             _rightEngineSlider.Draw(sb);
         }
