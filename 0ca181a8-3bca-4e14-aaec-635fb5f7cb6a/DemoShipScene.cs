@@ -31,6 +31,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             };
             world = new World();
             world.Ships.Add(new Ship(new Vector(200, 150)));
+            world.Ships.Add(new Ship(new Vector(300, 250)));
+            world.Ships.Add(new Ship(new Vector(400, 350)));
+
         }
 
         public void Draw(SpriteBatch sb)
@@ -46,8 +49,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 {
                     slider.Draw(sb);
                 }
-                sb.DrawString(Resources.FontArial12, pressedOn.ToString(), new Vector2(210, 110), Color.White);
             }
+            sb.DrawString(Resources.FontArial12, pressedOn.ToString(), new Vector2(410, 110), Color.White);
             world.Draw(sb);
             //sb.Draw(Resources.Pixel, new Rectangle(100, 100, 100, 100), Color.Blue);
             sb.End();
@@ -70,11 +73,11 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
             for (int i = 0; i < world.Ships.Count; i++)
             {
-                
                 if (mouseState.LeftButton == ButtonState.Pressed)
                     if (world.Ships[i].area.Contains(mouseState.X, mouseState.Y))
                     {
                             pressedOn = i;
+                        break;
                     }
                     else
                     {
