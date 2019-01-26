@@ -47,6 +47,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.cs" />
+    <Compile Include="Sim\Planet.cs" />
+    <Compile Include="Sim\Ship.cs" />
+    <Compile Include="Sim\World.cs" />
+    <Compile Include="Vector.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
