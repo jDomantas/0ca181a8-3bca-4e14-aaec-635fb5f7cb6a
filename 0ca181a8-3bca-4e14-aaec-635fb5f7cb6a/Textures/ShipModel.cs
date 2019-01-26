@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures
 {
@@ -9,20 +10,21 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures
         public TexturePart RightEngine;
         public TexturePart LeftFlame;
         public TexturePart RightFlame;
+        public PolygonHitbox HitBox;
 
         public void Draw(SpriteBatch sb, Vector pos, float angle, bool leftOn, bool rightOn)
         {
-            Body.Draw(sb, pos, angle);
-
             if (rightOn)
-                RightFlame.Draw(sb, pos, angle);
+                RightFlame?.Draw(sb, pos, angle);
             else
-                RightEngine.Draw(sb, pos, angle);
+                RightEngine?.Draw(sb, pos, angle);
 
             if (leftOn)
-                LeftFlame.Draw(sb, pos, angle);
+                LeftFlame?.Draw(sb, pos, angle);
             else
-                LeftEngine.Draw(sb, pos, angle);
+                LeftEngine?.Draw(sb, pos, angle);
+
+            Body?.Draw(sb, pos, angle);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim.Controllers;
+using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             // _world.Planets.Add(new Planet(new Vector(300, 400), 80));
             // _world.Planets.Add(new Planet(new Vector(600, 200), 60));
 
-            _world.Ships.Add(new Ship(new Vector(250, 280), PolygonHitbox.DefaultBox));
+            _world.Ships.Add(new Ship(new Vector(250, 280), Models.BlueModel));
             _controllers = new Dictionary<Guid, IShipController>
             {
                 [_world.Ships[0].Uid] = new KeyboardShipController(),

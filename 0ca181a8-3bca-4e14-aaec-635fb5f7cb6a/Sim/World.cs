@@ -39,6 +39,12 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             }
         }
 
+        public void EndTurn()
+        {
+            foreach (var ship in Ships)
+                ship.EndTurn();
+        }
+
         public void Draw(SpriteBatch sb)
         {
             foreach (var planet in Planets)

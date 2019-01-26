@@ -1,4 +1,5 @@
 ﻿using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim.Controllers;
+using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -12,14 +13,15 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public Vector Velocity { get; private set; }
         public double Angle { get; private set; }
         public double RotationSpeed { get; private set; }
-        public PolygonHitbox Hitbox { get; }
+        public ShipModel Model { get; }
         public bool Alive { get; private set; }
+        private bool _leftRunning, _rightRunning;
 
-        public Ship(Vector position, PolygonHitbox hitbox, Guid? uid = null)
+        public Ship(Vector position, ShipModel model, Guid? uid = null)
         {
             Alive = true;
             Uid = uid ?? Guid.NewGuid();
-            Hitbox = hitbox;
+            Model = model;
             Position = position;
             Velocity = Vector.Zero;
             Angle = 0;
@@ -28,6 +30,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
         public void Update(World world, double dt, IShipController controller)
         {
+            _leftRunning =  _rightRunning = false;
+
             controller.Update(world, this, dt);
             ApplyInput(controller, dt);
 
@@ -38,15 +42,20 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             RotationSpeed /= Math.Exp(dt * 4);
 
             foreach (var ship in world.Ships)
-                if (!ReferenceEquals(ship, this) && Hitbox.IntersectsOther(ship.Hitbox, Position, Angle, ship.Position, ship.Angle))
+                if (!ReferenceEquals(ship, this) && Model.HitBox.IntersectsOther(ship.Model.HitBox, Position, Angle, ship.Position, ship.Angle))
                 {
                     Kill();
                     ship.Kill();
                 }
 
             foreach (var planet in world.Planets)
-                if (Hitbox.IntersectsPlanet(planet, Position, Angle))
+                if (Model.HitBox.IntersectsPlanet(planet, Position, Angle))
                     Kill();
+        }
+
+        public void EndTurn()
+        {
+            _leftRunning = _rightRunning = false;
         }
 
         private void AddGravity(World world, double dt)
@@ -76,11 +85,13 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
             if (controller.LeftEngineEnabled)
             {
+                _rightRunning = true;
                 RotationSpeed -= RotationPower * dt;
                 forwardSpeed += 0.5;
             }
             if (controller.RightEngineEnabled)
             {
+                _leftRunning = true;
                 RotationSpeed += RotationPower * dt;
                 forwardSpeed += 0.5;
             }
@@ -90,26 +101,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
         public void Draw(SpriteBatch sb)
         {
-            const int Size = 30;
-
-            sb.Draw(
-                Resources.Pixel,
-                new Rectangle((int)Position.X, (int)Position.Y, Size * 2, Size * 2),
-                null,
-                Color.Blue,
-                (float)Angle,
-                new Vector2(0.5f, 0.5f),
-                SpriteEffects.None,
-                0);
-            sb.Draw(
-                Resources.PlayerShip,
-                new Rectangle((int)Position.X, (int)Position.Y, Size * 2, Size * 2),
-                null,
-                Color.White,
-                (float)(Angle+Math.PI/2),
-                new Vector2(243, 215),
-                SpriteEffects.None,
-                0);
+            Model.Draw(sb, Position, (float)Angle, _leftRunning, _rightRunning);
 
             if (Microsoft.Xna.Framework.Input.Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Space))
             {
@@ -117,7 +109,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                     Resources.Circle,
                     new Rectangle((int)Position.X - 2, (int)Position.Y - 2, 4, 4),
                     Color.White);
-                Hitbox.DrawDebug(sb, Position, Angle);
+                Model.HitBox.DrawDebug(sb, Position, Angle);
             }
         }
 
@@ -128,7 +120,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
         public Ship Clone()
         {
-            return new Ship(Position, Hitbox, Uid)
+            return new Ship(Position, Model, Uid)
             {
                 Velocity = Velocity,
                 Angle = Angle,

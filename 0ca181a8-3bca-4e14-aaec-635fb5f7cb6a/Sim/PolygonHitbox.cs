@@ -96,11 +96,19 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                 0);
         }
 
-        public static PolygonHitbox DefaultBox = new PolygonHitbox(
-            new Vector(30, 0),
-            new Vector(-20, 20),
-            new Vector(-10, 5),
-            new Vector(-10, -5),
-            new Vector(-20, -20));
+        public static PolygonHitbox PlayerBox = new PolygonHitbox(
+            new Vector(15, 0),
+            new Vector(-3, 20),
+            new Vector(-20, 25),
+            new Vector(-20, -25),
+            new Vector(-3, -20));
+
+        public static PolygonHitbox EnemyBox = new PolygonHitbox(
+            new Vector(10, 0),
+            new Vector(13, 18),
+            new Vector(0, 30),
+            new Vector(-10, 0),
+            new Vector(0, -30),
+            new Vector(13, -18));
     }
 }
