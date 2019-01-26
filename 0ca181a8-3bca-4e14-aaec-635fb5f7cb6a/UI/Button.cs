@@ -18,7 +18,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         private readonly Color HoverTextColor = Color.White;
         private readonly Color ClickTextColor = Color.White;
 
-        public event Action<Button> OnClick;
+        public event Action<Button> OnMouseUp;
+        public event Action<Button> OnHover;
         public Vector2 Coords { get; private set; }
         public Vector2 Size { get; private set; }
         public string Text { get; private set; }
@@ -40,15 +41,13 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
             if(rect.Contains(mousePoint))
             {
                 IsHovered = true;
+                OnHover(this);
+                if (IsClicked && mouseState.LeftButton == ButtonState.Released) OnMouseUp(this);
                 IsClicked = mouseState.LeftButton == ButtonState.Pressed;
             }
             else
             {
                 IsHovered = false;
-                if(IsClicked)
-                {
-                    OnClick(this);
-                }
                 IsClicked = false;
             }
         }
