@@ -79,6 +79,14 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 Content.Load<Texture2D>("Engines/redeng3-512"),
                 Content.Load<Texture2D>("Engines/redeng4-512")
             };
+            Resources.LeftButton = Content.Load<Texture2D>("Bottoms/left");
+            Resources.RightButton = Content.Load<Texture2D>("Bottoms/right");
+            Resources.barEmpty = Content.Load<Texture2D>("Bottoms/bar_empty");
+            Resources.barFull = Content.Load<Texture2D>("Bottoms/bar_full");
+            Resources.slider = Content.Load<Texture2D>("Bottoms/slider");
+            Resources.slider_highlight = Content.Load<Texture2D>("Bottoms/slider_highlight");
+            Resources.weapons = Content.Load<Texture2D>("Bottoms/weapons");
+            Resources.ui_base = Content.Load<Texture2D>("Bottoms/ui_base");
             Resources.PlayButton = Content.Load<Texture2D>("Bottoms/play1");
             Resources.PlayButtonHover = Content.Load<Texture2D>("Bottoms/play2");
             var world = new World();
@@ -95,7 +103,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             world.Planets.Add(new Planet(new Vector(850, 600), 90, 2));
             _currentScene = new GameScene(this, world);
         }
-
+        
         protected override void Update(GameTime gameTime)
         {
             GlobalTimer += 1 / 60.0;
