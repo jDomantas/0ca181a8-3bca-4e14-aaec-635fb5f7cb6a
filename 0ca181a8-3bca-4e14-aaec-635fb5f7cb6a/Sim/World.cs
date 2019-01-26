@@ -10,9 +10,14 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
     {
         public List<Planet> Planets { get; private set; } = new List<Planet>();
         public List<Ship> Ships { get; private set; } = new List<Ship>();
-
+        public int plays = 0;
         public World Clone()
         {
+            plays++;
+            if (plays % 3 == 0)
+            {
+                Planets.Add(new Planet(new Vector(850, 600), 1000, 2));
+            }
             return new World()
             {
                 Planets = Planets.Select(p => p.Clone()).ToList(),
@@ -37,6 +42,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                     Ships.RemoveAt(Ships.Count - 1);
                 }
             }
+            
         }
 
         public void Draw(SpriteBatch sb)

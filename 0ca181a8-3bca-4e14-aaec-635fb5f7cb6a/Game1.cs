@@ -83,8 +83,11 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
             world.Planets.Add(new Planet(new Vector(600, 500), 100, 0));
             world.Planets.Add(new Planet(new Vector(900, 800), 50, 1));
+            world.Planets.Add(new Planet(new Vector(950, 100), 50, 4));
+            world.Planets.Add(new Planet(new Vector(1100, 680), 100, 5));
+            world.Planets.Add(new Planet(new Vector(900, 800), 50, 1));
             world.Planets.Add(new Planet(new Vector(1100, 100), 50, 5));
-            world.Planets.Add(new Planet(new Vector(1900, 450), 500, 2));
+            world.Planets.Add(new Planet(new Vector(850, 600), 90, 2));
             _currentScene = new GameScene(this, world);
         }
 
@@ -94,7 +97,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 Exit();
 
             _currentScene.Update();
-
+            
             base.Update(gameTime);
         }
 
@@ -105,6 +108,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             _currentScene.Draw(_spriteBatch);
 
             base.Draw(gameTime);
+
         }
 
         public void SetScene(IScene scene)
