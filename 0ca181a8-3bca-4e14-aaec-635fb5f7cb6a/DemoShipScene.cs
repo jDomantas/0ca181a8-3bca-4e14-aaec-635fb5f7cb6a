@@ -68,13 +68,13 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             }
             world.Update(1 / 120.0);
 
-            foreach (var ship in world.Ships)
+            for (int i = 0; i < world.Ships.Count; i++)
             {
-
+                
                 if (mouseState.LeftButton == ButtonState.Pressed)
-                    if (ship.area.Contains(mouseState.X, mouseState.Y))
+                    if (world.Ships[i].area.Contains(mouseState.X, mouseState.Y))
                     {
-                            pressedOn = 1;
+                            pressedOn = i;
                     }
                     else
                     {
