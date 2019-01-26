@@ -22,5 +22,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                     data[i] = new Color(0, 0, 0, 0);
             tex.SetData(data);
         }
+        public static Texture2D PlayButton;
+        public static Texture2D PlayButtonHover;
     }
 }

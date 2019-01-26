@@ -22,15 +22,21 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         public event Action<Button> OnHover;
         public Vector2 Coords { get; private set; }
         public Vector2 Size { get; private set; }
-        public string Text { get; private set; }
+        public Texture2D Texture { get; }
+        public Texture2D TextureHover { get; }
         public bool IsHovered { get; private set; }
         public bool IsClicked { get; private set; }
 
-        public Button(int x, int y, int w, int h, string text = null)
+        public Button(Texture2D texture, Texture2D textureHover, int x, int y, int w)
+            : this(texture, textureHover, x, y, w, w * texture.Height / texture.Width)
+        { }
+
+        public Button(Texture2D texture, Texture2D textureHover, int x, int y, int w, int h)
         {
+            Texture = texture;
+            TextureHover = textureHover;
             Size = new Vector2(w, h);
             Coords = new Vector2(x, y);
-            Text = text;
         }
 
         public void Update()
@@ -54,13 +60,13 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
 
         public void Draw(SpriteBatch sb)
         {
-            var color = IsHovered ? (IsClicked ? ClickColor : HoverColor) : DefaultColor;
-            sb.Draw(Resources.Pixel, new Rectangle((int)Coords.X, (int)Coords.Y, (int)Size.X, (int)Size.Y), color);
-            if(Text != null)
+            if(!IsHovered)
             {
-                var textColor = IsHovered ? (IsClicked ? ClickTextColor : HoverTextColor) : DefaultTextColor;
-                var textSize = Resources.FontArial12.MeasureString(Text);
-                sb.DrawString(Resources.FontArial12, Text, Coords+Size/2-textSize/2, textColor);
+                sb.Draw(Texture, new Rectangle((int)Coords.X, (int)Coords.Y, (int)Size.X, (int)Size.Y), Color.White);
+            }
+            else
+            {
+                sb.Draw(TextureHover, new Rectangle((int)Coords.X, (int)Coords.Y, (int)Size.X, (int)Size.Y), Color.White);
             }
         }
     }

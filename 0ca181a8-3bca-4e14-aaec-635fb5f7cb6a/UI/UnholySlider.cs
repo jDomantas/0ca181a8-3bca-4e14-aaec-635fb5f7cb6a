@@ -62,7 +62,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         {
             _bars = intervals
                     .Select(i => (int)(i * w + x))
-                    .Select(c => new Button(c - BarWidth / 2, (int)_position.Y, BarWidth, (int)_size.Y))
+                    .Select(c => new Button(Resources.Pixel, Resources.Pixel, c - BarWidth / 2, (int)_position.Y, BarWidth, (int)_size.Y))
                     .ToList();
         }
 
@@ -87,7 +87,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
                 if(sliderRect.Contains(mousePoint) && _prevState == ButtonState.Pressed && mouseState.LeftButton == ButtonState.Released)
                 {
                     // add bar
-                    var bar = new Button(mousePoint.X - BarWidth / 2, (int)_position.Y, BarWidth, (int)_size.Y);
+                    var bar = new Button(Resources.Pixel, Resources.Pixel, mousePoint.X - BarWidth / 2, (int)_position.Y, BarWidth, (int)_size.Y);
                     bar.OnMouseUp += b => _clickedBar = b;
                     bar.OnHover += b => _hoveredBar = b;
                     _bars.Add(bar);

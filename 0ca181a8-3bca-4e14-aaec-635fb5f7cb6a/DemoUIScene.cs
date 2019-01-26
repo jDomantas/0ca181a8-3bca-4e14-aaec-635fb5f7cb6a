@@ -18,9 +18,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         {
             buttons = new List<Button>()
             {
-                new Button(50, 200, 100, 50, "Test1"),
-                new Button(200, 200, 100, 50, "Test2"),
-                new Button(350, 200, 100, 50, "Test3"),
+                new Button(Resources.PlayButton, Resources.PlayButtonHover, 50, 200, 100),
+                new Button(Resources.PlayButton, Resources.PlayButtonHover, 200, 200, 100),
+                new Button(Resources.PlayButton, Resources.PlayButtonHover, 350, 200, 100),
             };
             sliders = new List<UnholySlider>()
             {
