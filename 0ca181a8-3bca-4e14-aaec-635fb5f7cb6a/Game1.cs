@@ -1,4 +1,5 @@
 ﻿using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim;
+using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -7,6 +8,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 {
     class Game1 : Game, ISceneHost
     {
+        public static double GlobalTimer = 0;
+
         public GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
         public IScene _currentScene;
@@ -77,9 +80,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 Content.Load<Texture2D>("Engines/redeng4-512")
             };
             var world = new World();
-            world.Ships.Add(new Ship(new Vector(100, 100), PolygonHitbox.DefaultBox));
-            world.Ships.Add(new Ship(new Vector(400, 150), PolygonHitbox.DefaultBox));
-            world.Ships.Add(new Ship(new Vector(150, 400), PolygonHitbox.DefaultBox));
+            world.Ships.Add(new Ship(new Vector(100, 100), Models.RedModel));
+            //world.Ships.Add(new Ship(new Vector(400, 150), Models.BlueModel));
+            //world.Ships.Add(new Ship(new Vector(150, 400), Models.BlueModel));
 
             world.Planets.Add(new Planet(new Vector(600, 500), 100, 0));
             world.Planets.Add(new Planet(new Vector(900, 800), 50, 1));
@@ -93,6 +96,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
         protected override void Update(GameTime gameTime)
         {
+            GlobalTimer += 1 / 60.0;
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -103,7 +108,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             _currentScene.Draw(_spriteBatch);
 
