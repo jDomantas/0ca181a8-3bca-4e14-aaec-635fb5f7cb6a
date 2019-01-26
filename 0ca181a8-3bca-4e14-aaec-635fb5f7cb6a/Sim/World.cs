@@ -21,7 +21,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public void Update(double dt)
         {
             foreach (var ship in Ships)
-                ship.Update(dt);
+                ship.Update(this, dt);
         }
 
         public void Draw(SpriteBatch sb)

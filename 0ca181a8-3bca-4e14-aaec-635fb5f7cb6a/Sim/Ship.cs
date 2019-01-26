@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 {
@@ -18,12 +19,30 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             RotationSpeed = 0;
         }
 
-        public void Update(double dt)
+        public void Update(World world, double dt)
         {
-            Position += Velocity;
+            AddGravity(world, dt);
+            Position += Velocity * dt;
 
             Angle += RotationSpeed * dt;
-            Position += Velocity * dt;
+            RotationSpeed /= Math.Exp(dt);
+        }
+
+        private void AddGravity(World world, double dt)
+        {
+            var total = Vector.Zero;
+
+            foreach (var planet in world.Planets)
+            {
+                var delta = planet.Position - Position;
+                if (delta.Length < 20)
+                    continue;
+
+                total += delta.Normalized / delta.LengthSquared;
+            }
+
+            Velocity += total * 10000000 * dt;
+            Velocity /= Math.Exp(dt / 2);
         }
 
         public void Draw(SpriteBatch sb)

@@ -44,6 +44,7 @@
     <Compile Include="DemoScene.cs" />
     <Compile Include="DemoUIScene.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Sim\SimTestScene.cs" />
     <Compile Include="IScene.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
