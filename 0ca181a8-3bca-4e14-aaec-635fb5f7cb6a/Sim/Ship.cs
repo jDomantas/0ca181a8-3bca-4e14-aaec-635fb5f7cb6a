@@ -7,13 +7,15 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 {
     class Ship
     {
+        public Guid Uid { get; }
         public Vector Position { get; private set; }
         public Vector Velocity { get; private set; }
         public double Angle { get; private set; }
         public double RotationSpeed { get; private set; }
 
-        public Ship(Vector position)
+        public Ship(Vector position, Guid? uid = null)
         {
+            Uid = uid ?? Guid.NewGuid();
             Position = position;
             Velocity = Vector.Zero;
             Angle = 0;
@@ -95,7 +97,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
         public Ship Clone()
         {
-            return new Ship(Position)
+            return new Ship(Position, Uid)
             {
                 Velocity = Velocity,
                 Angle = Angle,

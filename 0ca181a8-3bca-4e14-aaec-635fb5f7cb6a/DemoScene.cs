@@ -5,7 +5,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 {
     class DemoScene : IScene
     {
-        public void Update() { }
+        public void Update(ISceneHost host) { }
 
         public void Draw(SpriteBatch sb)
         {

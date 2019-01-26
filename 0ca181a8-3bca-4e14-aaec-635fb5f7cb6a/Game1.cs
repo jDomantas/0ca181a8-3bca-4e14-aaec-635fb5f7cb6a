@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 {
-    class Game1 : Game
+    class Game1 : Game, ISceneHost
     {
         public GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
@@ -49,7 +49,13 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             Resources.Circle.SetData(colors);
 
             Resources.FontArial12 = Content.Load<SpriteFont>("font-arial-12");
-            _currentScene = new DemoUIScene();
+
+            var world = new World();
+            world.Ships.Add(new Ship(new Vector(100, 100)));
+            world.Ships.Add(new Ship(new Vector(400, 150)));
+            world.Ships.Add(new Ship(new Vector(150, 400)));
+
+            _currentScene = new GameScene(this, world);
         }
 
         protected override void Update(GameTime gameTime)
@@ -57,7 +63,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            _currentScene.Update();
+            _currentScene.Update(this);
 
             base.Update(gameTime);
         }
@@ -69,6 +75,11 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             _currentScene.Draw(_spriteBatch);
 
             base.Draw(gameTime);
+        }
+
+        public void SetScene(IScene scene)
+        {
+            _currentScene = scene;
         }
     }
 }

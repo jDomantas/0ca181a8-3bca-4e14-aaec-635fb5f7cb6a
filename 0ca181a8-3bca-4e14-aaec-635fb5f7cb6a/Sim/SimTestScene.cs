@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim.Controllers;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 {
@@ -16,9 +19,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             //_world.Ships.Add(new Ship(new Vector(550, 380)));
         }
 
-        public void Update()
+        public void Update(ISceneHost host)
         {
-            _world.Update(1 / 60.0);
+            _world.Update(1 / 60.0, new Dictionary<Guid, IShipController>());
         }
 
         public void Draw(SpriteBatch sb)

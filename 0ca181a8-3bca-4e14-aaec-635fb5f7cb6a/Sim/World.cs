@@ -1,5 +1,6 @@
 ﻿using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim.Controllers;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,10 +20,14 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             };
         }
 
-        public void Update(double dt)
+        public void Update(double dt, Dictionary<Guid, IShipController> controllers)
         {
             foreach (var ship in Ships)
-                ship.Update(this, dt, new KeyboardShipController());
+            {
+                if (!controllers.TryGetValue(ship.Uid, out var contr))
+                    contr = new EmptyShipController();
+                ship.Update(this, dt, contr);
+            }
         }
 
         public void Draw(SpriteBatch sb)
