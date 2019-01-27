@@ -29,13 +29,13 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
             _commands = new Dictionary<Guid, ShipCommands>();
 
-            _previewButton = new Button(Resources.PlayButton, Resources.PlayButtonHover, 5, 5, 100);
-            _previewButton.OnMouseUp += OnPreview;
-
-            _submitButton = new Button(Resources.SubmitButton, Resources.SubmitButtonHover, 110, 5, 100);
+            _submitButton = new Button(Resources.SubmitButton, Resources.SubmitButtonHover, host.ScreenWidth-100-10, host.ScreenHeight - 70, 100);
             _submitButton.OnMouseUp += OnSubmit;
 
-            _playbackButton = new Button(Resources.PlayButton, Resources.PlayButtonHover, 5, host.ScreenHeight - 100, 100);
+            _previewButton = new Button(Resources.PlayButton, Resources.PlayButtonHover, host.ScreenWidth-100-10-100-10, host.ScreenHeight-70, 100);
+            _previewButton.OnMouseUp += OnPreview;
+
+            _playbackButton = new Button(Resources.PlayButton, Resources.PlayButtonHover, host.ScreenWidth-100-10-100-10-100-10, host.ScreenHeight - 70, 100);
             _playbackButton.OnMouseUp += OnPlayback;
         }
 
