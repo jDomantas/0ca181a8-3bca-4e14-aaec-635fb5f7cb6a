@@ -89,6 +89,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             Resources.LeftLabel = Content.Load<Texture2D>("Bottoms/left");
             Resources.RightLabel = Content.Load<Texture2D>("Bottoms/right");
             Resources.WeaponsLabel = Content.Load<Texture2D>("Bottoms/weapons");
+            Resources.BarEmpty = Content.Load<Texture2D>("Bottoms/bar_empty");
+            Resources.BarFull = Content.Load<Texture2D>("Bottoms/bar_full");
+            Resources.BarRed = Content.Load<Texture2D>("Bottoms/bar_red");
             var world = new World();
             world.Ships.Add(new Ship(new Vector(100, 100), Models.RedModel));
             //world.Ships.Add(new Ship(new Vector(400, 150), Models.BlueModel));

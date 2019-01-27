@@ -9,8 +9,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
     {
         private const int LabelMargin = 50;
         public Guid ShipId { get; }
-        private readonly UnholySlider _leftEngineSlider;
-        private readonly UnholySlider _rightEngineSlider;
+        private readonly HolySlider _leftEngineSlider;
+        private readonly HolySlider _rightEngineSlider;
         private readonly int _x;
         private readonly int _y;
         private readonly int _width;
@@ -19,8 +19,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         public ControlPopup(Ship ship, int x, int y, int width, int height, ShipCommands startCommands)
         {
             ShipId = ship.Uid;
-            _leftEngineSlider = new UnholySlider(x + LabelMargin, y + 10, width - 20 - LabelMargin, 20, 0.5, startCommands.LeftEngineToggles);
-            _rightEngineSlider = new UnholySlider(x + LabelMargin, y + 40, width - 20 - LabelMargin, 20, 0.5, startCommands.RightEngineToggles);
+            _leftEngineSlider = new HolySlider(x + LabelMargin, y + 10, width - 20 - LabelMargin, 20, startCommands.LeftEngineToggles, 0.5);
+            _rightEngineSlider = new HolySlider(x + LabelMargin, y + 40, width - 20 - LabelMargin, 20, startCommands.RightEngineToggles, 0.5);
             _x = x;
             _y = y;
             _width = width;

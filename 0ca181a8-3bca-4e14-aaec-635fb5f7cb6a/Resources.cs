@@ -32,5 +32,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         public static Texture2D LeftLabel;
         public static Texture2D RightLabel;
         public static Texture2D WeaponsLabel;
+        public static Texture2D BarEmpty;
+        public static Texture2D BarFull;
+        public static Texture2D BarRed;
     }
 }
