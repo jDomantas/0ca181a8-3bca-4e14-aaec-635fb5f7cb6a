@@ -29,7 +29,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             Model = model;
             Position = position;
             Velocity = Vector.Zero;
-            Angle = 0;
+            Angle = MathHelper.PiOver2;
             RotationSpeed = 0;
             _leftEngineRemaining = _rightEngineRemaining = World.MaxEnginesPerTurn;
             ShotTimer = 0;
@@ -64,7 +64,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             foreach (var planet in world.Planets)
                 if (Model.HitBox.IntersectsPlanet(planet, Position, Angle))
                     Kill();
-            if (Position.X < 0 || Position.X >= world.ScreenWidth || Position.Y < 0 || Position.Y >= world.ScreenHeight) Kill();
+            if (Position.X < 0 || Position.X >= world.ScreenWidth * Game1.ScaleHack || Position.Y < 0 || Position.Y >= world.ScreenHeight * Game1.ScaleHack)
+                Kill();
         }
 
         private void FireLazer(World world)

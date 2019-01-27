@@ -135,19 +135,24 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             Resources.BlueTurnIndicator = Content.Load<Texture2D>("Bottoms/blueturn");
 
             var world = new World(ScreenWidth, ScreenHeight);
-            world.Ships.Add(new Ship(new Vector(100, 100), Models.RedModel));
-            world.Ships.Add(new Ship(new Vector(400, 150), Models.BlueModel));
+            world.Ships.Add(new Ship(new Vector(100, 100), Models.BlueModel));
+            world.Ships.Add(new Ship(new Vector(130, 400), Models.BlueModel));
+            world.Ships.Add(new Ship(new Vector(115, 560), Models.BlueModel));
+
+            world.Ships.Add(new Ship(new Vector(1600 * 1.5 - 100, 1000 - 100), Models.RedModel));
+            world.Ships.Add(new Ship(new Vector(1600 * 1.5 - 130, 1000 - 400), Models.RedModel));
+            world.Ships.Add(new Ship(new Vector(1600 * 1.5 - 115, 1000 - 560), Models.RedModel));
             //world.Ships.Add(new Ship(new Vector(150, 400), Models.BlueModel));
 
-            world.Planets.Add(new Planet(new Vector(600, 500), 100, 0));
-            world.Planets.Add(new Planet(new Vector(900, 800), 50, 1));
-            world.Planets.Add(new Planet(new Vector(950, 100), 50, 4));
+            world.Planets.Add(new Planet(new Vector(600, 500), 100, 2));
+            //world.Planets.Add(new Planet(new Vector(900, 800), 50, 1));
+            //world.Planets.Add(new Planet(new Vector(950, 100), 50, 4));
             //world.Planets.Add(new Planet(new Vector(1100, 680), 100, 5));
             world.Planets.Add(new BlendedPlanet(new Vector(1100, 680), 100));
-            world.Planets.Add(new Planet(new Vector(300, 800), 90, 1));
-            world.Planets.Add(new Planet(new Vector(1100, 100), 50, 5));
+            //world.Planets.Add(new Planet(new Vector(300, 800), 90, 1));
+            world.Planets.Add(new Planet(new Vector(1700, 300), 50, 4));
             //world.Planets.Add(new Planet(new Vector(850, 600), 90, 2));
-            world.Planets.Add(new PulsingPlanet(new Vector(850, 600), 90));
+            world.Planets.Add(new PulsingPlanet(new Vector(1650, 1000), 90));
 
             var playbackManager = new PlaybackManager();
 

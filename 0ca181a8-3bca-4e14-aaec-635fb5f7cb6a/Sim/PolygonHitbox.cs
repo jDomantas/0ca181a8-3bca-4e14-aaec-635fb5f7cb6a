@@ -124,7 +124,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             var angle = Math.Atan2(d.Y, d.X);
             sb.Draw(
                 Resources.Pixel,
-                new Rectangle((int)Math.Round(a.X), (int)Math.Round(a.Y), (int)Math.Round(d.Length), lineWidth),
+                new Rectangle((int)Math.Round(a.X), (int)Math.Round(a.Y), (int)Math.Ceiling(d.Length), lineWidth),
                 null,
                 color,
                 (float)angle,
