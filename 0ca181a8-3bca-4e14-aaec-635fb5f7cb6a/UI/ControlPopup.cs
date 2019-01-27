@@ -21,7 +21,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         {
             ShipId = ship.Uid;
             _leftEngineSlider = new HolySlider(x + LabelMargin - 5, y + 10, width - 6 - LabelMargin, 35, startCommands.LeftEngineToggles, World.MaxEnginesPerTurn / World.TurnLength);
-            _rightEngineSlider = new HolySlider(x + LabelMargin - 5, y + 63, width - 6 - LabelMargin, 35, startCommands.WeaponShots, World.MaxEnginesPerTurn / World.TurnLength);
+            _rightEngineSlider = new HolySlider(x + LabelMargin - 5, y + 63, width - 6 - LabelMargin, 35, startCommands.RightEngineToggles, World.MaxEnginesPerTurn / World.TurnLength);
             _weaponsSlider = new HolySlider(x + LabelMargin - 5, y + 116, width - 6 - LabelMargin, 35, startCommands.WeaponShots, 2);
             _x = x;
             _y = y;
