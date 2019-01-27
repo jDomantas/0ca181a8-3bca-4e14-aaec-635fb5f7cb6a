@@ -75,7 +75,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                             var x = (int)ship.Position.X + 50;
                             var y = (int)ship.Position.Y - 35;
 
-                            _popup = new ControlPopup(ship, x, y, 300, 70, GetShipCommands(ship));
+                            _popup = new ControlPopup(ship, x, y, 400, 162, GetShipCommands(ship));
                             break;
                         }
                     }
@@ -99,7 +99,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             if (_commands.TryGetValue(ship.Uid, out var commands))
                 return commands;
 
-            _commands[ship.Uid] = new ShipCommands(new List<double>(), new List<double>());
+            _commands[ship.Uid] = new ShipCommands(new List<double>(), new List<double>(), new List<double>());
             return _commands[ship.Uid];
         }
 

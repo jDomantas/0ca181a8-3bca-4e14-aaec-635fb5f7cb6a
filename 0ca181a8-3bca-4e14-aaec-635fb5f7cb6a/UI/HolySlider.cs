@@ -9,7 +9,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
 {
     class HolySlider
     {
-        private const int SelectorSnapDistance = 5;
+        private const int SelectorSnapDistance = 8;
 
         private readonly int _x;
         private readonly int _y;
@@ -19,6 +19,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         private double _maxFill;
         private List<double> _selections;
         private bool _oldMouseDown;
+        private readonly int _maxPoints;
 
         public List<double> ActivePoints => _selections.ToList();
 
@@ -29,6 +30,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
             _width = width;
             _height = height;
             _selections = points.ToList();
+            _maxPoints = int.MaxValue;
         }
 
         public HolySlider(int x, int y, int width, int height, List<double> points, double maxFill)
@@ -36,6 +38,12 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         {
             _drawFill = true;
             _maxFill = maxFill;
+        }
+
+        public HolySlider(int x, int y, int width, int height, List<double> points, int maxPoints)
+            : this(x, y, width, height, points)
+        {
+            _maxPoints = maxPoints;
         }
 
         public void Update()
@@ -50,7 +58,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
                 else
                 {
                     double at = (double)(mouse.X - _x) / _width;
-                    if (at >= 0 && at <= 1)
+                    if (at >= 0 && at <= 1 && _selections.Count < _maxPoints)
                     {
                         _selections.Add(at);
                         _selections.Sort();
@@ -106,7 +114,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
             var (distance, selector) = ClosestSelector(mouse.X);
             if (mouse.Y < _y || mouse.Y >= _y + _height)
                 selector = -1;
-            else if ((selector == -1 || distance > SelectorSnapDistance) && mouse.X >= _x && mouse.X < _x + _width)
+            else if ((selector == -1 || distance > SelectorSnapDistance) && mouse.X >= _x && mouse.X < _x + _width && _selections.Count < _maxPoints)
             {
                 var tex = Resources.SliderHover;
                 sb.Draw(
