@@ -104,6 +104,21 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
 
             var mouse = Mouse.GetState();
             var (distance, selector) = ClosestSelector(mouse.X);
+            if (mouse.Y < _y || mouse.Y >= _y + _height)
+                selector = -1;
+            else if ((selector == -1 || distance > SelectorSnapDistance) && mouse.X >= _x && mouse.X < _x + _width)
+            {
+                var tex = Resources.SliderHover;
+                sb.Draw(
+                    tex,
+                    new Rectangle(mouse.X, _y, tex.Width * _height / tex.Height, _height),
+                    null,
+                    Color.White,
+                    0,
+                    new Vector2(tex.Width / 2, 0),
+                    SpriteEffects.None,
+                    0);
+            }
             for (int i = 0; i < _selections.Count; i++)
             {
                 var tex = i == selector && distance <= SelectorSnapDistance ? Resources.SliderHover : Resources.Slider;
