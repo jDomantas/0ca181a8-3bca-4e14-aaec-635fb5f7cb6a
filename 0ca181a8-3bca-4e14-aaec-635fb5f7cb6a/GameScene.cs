@@ -161,28 +161,32 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             if(_popup != null) _commands[_popup.ShipId] = _popup.CurrentCommands();
             foreach (var ship in simWorld.Ships) GetShipCommands(ship);
             var controllers = _commands.ToDictionary(c => c.Key, c => (IShipController)new PlayerShipController(c.Value));
+
+            var predictionPoints = new Dictionary<Guid, List<Vector>>();
+            foreach (var ship in simWorld.Ships) predictionPoints[ship.Uid] = new List<Vector>();
+
             for (double time = 0; time < World.TurnLength; time += dt)
             {
-                var prevShips = simWorld.Ships.Select(s => s.Clone()).ToList();
                 simWorld.Update(dt, controllers);
-                foreach(var oldShip in prevShips)
-                {
-                    if (simWorld.Ships.All(s => s.Uid != oldShip.Uid))
-                    {
-                        // oldShip died
-                        sb.Draw(
-                            Resources.Pixel,
-                            new Rectangle((int)(oldShip.Position.X/Game1.ScaleHack), (int)(oldShip.Position.Y / Game1.ScaleHack), 5, 5),
-                            Color.Red
-                        );
-                    }
-                }
                 foreach (var ship in simWorld.Ships)
                 {
+                    predictionPoints[ship.Uid].Add(ship.Position/Game1.ScaleHack);
+                }
+            }
+            foreach(var entry in predictionPoints)
+            {
+                var points = entry.Value;
+                for(int i = 0; i < points.Count-1; i++)
+                {
+                    PolygonHitbox.DrawLine(sb, points[i], points[i + 1], Color.White, 2);
+                }
+                if(simWorld.Ships.All(s => s.Uid != entry.Key))
+                {
+                    var lastPoint = points[points.Count - 1];
                     sb.Draw(
                         Resources.Pixel,
-                        new Rectangle((int)(ship.Position.X / Game1.ScaleHack), (int)(ship.Position.Y / Game1.ScaleHack), 5, 5),
-                        Color.White
+                        new Rectangle((int)lastPoint.X, (int)lastPoint.Y, 3, 3),
+                        Color.Red
                     );
                 }
             }

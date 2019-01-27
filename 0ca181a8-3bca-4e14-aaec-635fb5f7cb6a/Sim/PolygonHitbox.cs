@@ -113,15 +113,20 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             }
         }
 
-        private void DrawLine(SpriteBatch sb, Vector a, Vector b)
+        public static void DrawLine(SpriteBatch sb, Vector a, Vector b)
+        {
+            DrawLine(sb, a, b, Color.Red, 2);
+        }
+
+        public static void DrawLine(SpriteBatch sb, Vector a, Vector b, Color color, int lineWidth)
         {
             var d = b - a;
             var angle = Math.Atan2(d.Y, d.X);
             sb.Draw(
                 Resources.Pixel,
-                new Rectangle((int)Math.Round(a.X), (int)Math.Round(a.Y), (int)Math.Round(d.Length), 2),
+                new Rectangle((int)Math.Round(a.X), (int)Math.Round(a.Y), (int)Math.Round(d.Length), lineWidth),
                 null,
-                Color.Red,
+                color,
                 (float)angle,
                 new Vector2(0, 0.5f),
                 SpriteEffects.None,
