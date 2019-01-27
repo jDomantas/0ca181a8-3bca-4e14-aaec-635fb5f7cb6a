@@ -69,6 +69,38 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             return true;
         }
 
+        public double IntersectRay(Vector pos, double angle, Vector start, Vector dir)
+        {
+            var xAxis1 = Vector.AtAngle(angle);
+            var best = double.PositiveInfinity;
+
+            for (int i = 0; i < Points.Length; i++)
+            {
+                var a = Points[i].Translate(xAxis1) + pos;
+                var b = Points[(i + 1) % Points.Length].Translate(xAxis1) + pos;
+                var intersect = IntersectRay(a, b, start, start + dir);
+                if (intersect < best)
+                    best = intersect;
+            }
+            return best;
+        }
+
+        private static double IntersectRay(Vector a, Vector b, Vector c, Vector d)
+        {
+            var p = (c - a).Cross(d - c);
+            var q = (b - a).Cross(d - c);
+            if (Math.Abs(q) < 0.0001) return double.PositiveInfinity;
+
+            p /= q;
+            if (p < 0 || p > 1) return double.PositiveInfinity;
+
+            var r = (b - a).Cross(a - c);
+            r /= q;
+            if (r < 0) return double.PositiveInfinity;
+
+            return (d - c).Length * r;
+        }
+
         public void DrawDebug(SpriteBatch sb, Vector position, double rot)
         {
             var xAxis = Vector.AtAngle(rot);
