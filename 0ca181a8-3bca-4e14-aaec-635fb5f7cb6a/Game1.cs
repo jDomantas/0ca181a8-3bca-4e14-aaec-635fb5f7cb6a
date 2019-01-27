@@ -66,7 +66,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 Content.Load<Texture2D>("Planet3"),
                 Content.Load<Texture2D>("Planet4"),
                 Content.Load<Texture2D>("Planet5"),
-                Content.Load<Texture2D>("Planet6-512")
+                Content.Load<Texture2D>("Planet6")
             };
             Resources.BlueEngine = new List<Texture2D>(){
                 Content.Load<Texture2D>("Engines/blueng-512"),
@@ -116,15 +116,15 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             };
             Resources.Background = Content.Load<Texture2D>(backgroundOptions[new Random().Next(backgroundOptions.Count)]);
             var world = new World(ScreenWidth, ScreenHeight);
-            world.Ships.Add(new Ship(1, new Vector(100, 100), Models.RedModel));
-            world.Ships.Add(new Ship(2, new Vector(400, 150), Models.BlueModel));
+            world.Ships.Add(new Ship(new Vector(100, 100), Models.RedModel));
+            world.Ships.Add(new Ship(new Vector(400, 150), Models.BlueModel));
             //world.Ships.Add(new Ship(new Vector(150, 400), Models.BlueModel));
 
             world.Planets.Add(new Planet(new Vector(600, 500), 100, 0));
             world.Planets.Add(new Planet(new Vector(900, 800), 50, 1));
             world.Planets.Add(new Planet(new Vector(950, 100), 50, 4));
             world.Planets.Add(new Planet(new Vector(1100, 680), 100, 5));
-            world.Planets.Add(new Planet(new Vector(900, 800), 50, 1));
+            world.Planets.Add(new Planet(new Vector(300, 800), 90, 1));
             world.Planets.Add(new Planet(new Vector(1100, 100), 50, 5));
             world.Planets.Add(new Planet(new Vector(850, 600), 90, 2));
 

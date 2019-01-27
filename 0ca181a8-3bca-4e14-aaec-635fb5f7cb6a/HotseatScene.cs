@@ -30,13 +30,13 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                     foreach (var c in commands)
                     {
                         var ship = _world.Ships.FirstOrDefault(s => s.Uid == c.Key);
-                        if (ship != null && ship.Team == 1)
+                        if (ship != null && ship.Model.Team == 1)
                             com.Add(c.Key, new PlayerShipController(c.Value));
                     }
                     foreach (var c in commands2)
                     {
                         var ship = _world.Ships.FirstOrDefault(s => s.Uid == c.Key);
-                        if (ship != null && ship.Team == 2)
+                        if (ship != null && ship.Model.Team == 2)
                             com.Add(c.Key, new PlayerShipController(c.Value));
                     }
 

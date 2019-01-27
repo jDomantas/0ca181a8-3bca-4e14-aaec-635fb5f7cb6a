@@ -13,6 +13,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures
     {
         public static ShipModel BlueModel => new ShipModel
         {
+            Team = 1,
             Body = new TexturePart
             {
                 Texture = new List<Texture2D> { Resources.PlayerShip },
@@ -63,6 +64,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures
 
         public static ShipModel RedModel => new ShipModel
         {
+            Team = 2,
             Body = new TexturePart
             {
                 Texture = new List<Texture2D> { Resources.EnemyShip },
