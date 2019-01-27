@@ -16,7 +16,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             this.planetIndex = planetIndex;
         }
 
-        public void Draw(SpriteBatch sb)
+        public virtual void Draw(SpriteBatch sb)
         {
             
             sb.Draw(
@@ -36,7 +36,12 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
         }
 
-        public Planet Clone()
+        public virtual void Update(double dt)
+        {
+
+        }
+
+        public virtual Planet Clone()
         {
             return new Planet(Position, Radius, planetIndex);
         }

@@ -20,6 +20,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         public int ScreenWidth => 1600;
         public int ScreenHeight => 900;
 
+        public double ScaleHack = 2;
+
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -66,7 +69,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 Content.Load<Texture2D>("Planet3"),
                 Content.Load<Texture2D>("Planet4"),
                 Content.Load<Texture2D>("Planet5"),
-                Content.Load<Texture2D>("Planet6-512")
+                Content.Load<Texture2D>("Planet6"),
+                Content.Load<Texture2D>("Planet7"),
             };
             Resources.BlueEngine = new List<Texture2D>(){
                 Content.Load<Texture2D>("Engines/blueng-512"),
@@ -81,6 +85,11 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 Content.Load<Texture2D>("Engines/redeng2-512"),
                 Content.Load<Texture2D>("Engines/redeng3-512"),
                 Content.Load<Texture2D>("Engines/redeng4-512")
+            };
+            Resources.PulsingPlanet = new List<Texture2D>(){
+                Content.Load<Texture2D>("planet2-l1"),
+                Content.Load<Texture2D>("planet2-l2"),
+                Content.Load<Texture2D>("planet2-l3"),
             };
             Resources.PlayButton = Content.Load<Texture2D>("Bottoms/play1");
             Resources.PlayButtonHover = Content.Load<Texture2D>("Bottoms/play2");
@@ -126,14 +135,17 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             world.Planets.Add(new Planet(new Vector(600, 500), 100, 0));
             world.Planets.Add(new Planet(new Vector(900, 800), 50, 1));
             world.Planets.Add(new Planet(new Vector(950, 100), 50, 4));
-            world.Planets.Add(new Planet(new Vector(1100, 680), 100, 5));
-            world.Planets.Add(new Planet(new Vector(900, 800), 50, 1));
+            //world.Planets.Add(new Planet(new Vector(1100, 680), 100, 5));
+            world.Planets.Add(new BlendedPlanet(new Vector(1100, 680), 100));
+            world.Planets.Add(new Planet(new Vector(300, 800), 90, 1));
             world.Planets.Add(new Planet(new Vector(1100, 100), 50, 5));
-            world.Planets.Add(new Planet(new Vector(850, 600), 90, 2));
+            //world.Planets.Add(new Planet(new Vector(850, 600), 90, 2));
+            world.Planets.Add(new PulsingPlanet(new Vector(850, 600), 90));
 
             var playbackManager = new PlaybackManager();
 
-            _currentScene = new GameScene(this, world, playbackManager);
+            //_currentScene = new GameScene(this, world, playbackManager);
+            _currentScene = new HotseatScene(this, world, playbackManager);
         }
         
         protected override void Update(GameTime gameTime)
@@ -151,6 +163,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+
+
 
             _spriteBatch.Begin();
             _spriteBatch.Draw(

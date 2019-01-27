@@ -45,14 +45,17 @@
     <Compile Include="DemoUIScene.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameScene.cs" />
+    <Compile Include="HotseatScene.cs" />
     <Compile Include="ISceneHost.cs" />
     <Compile Include="PlaybackManager.cs" />
     <Compile Include="PlaybackScene.cs" />
     <Compile Include="PreviewScene.cs" />
     <Compile Include="ShipCommands.cs" />
+    <Compile Include="Sim\BlendedPlanet.cs" />
     <Compile Include="Sim\Controllers\EmptyShipController.cs" />
     <Compile Include="Sim\Particle.cs" />
     <Compile Include="Sim\PolygonHitbox.cs" />
+    <Compile Include="Sim\PulsingPlanet.cs" />
     <Compile Include="Sim\SimTestScene.cs" />
     <Compile Include="IScene.cs" />
     <Compile Include="Program.cs" />
