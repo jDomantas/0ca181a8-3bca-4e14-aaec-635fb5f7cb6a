@@ -16,6 +16,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         private readonly Dictionary<Guid, ShipCommands> _commands;
         private readonly Button _previewButton;
         private readonly Button _submitButton;
+        private readonly Button _playbackButton;
         private readonly PlaybackManager _playbackManager;
         private ControlPopup _popup;
         private bool _oldPressed;
@@ -33,6 +34,14 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
             _submitButton = new Button(Resources.SubmitButton, Resources.SubmitButtonHover, 110, 5, 100);
             _submitButton.OnMouseUp += OnSubmit;
+
+            _playbackButton = new Button(Resources.PlayButton, Resources.PlayButtonHover, 5, host.ScreenHeight - 100, 100);
+            _playbackButton.OnMouseUp += OnPlayback;
+        }
+
+        private void OnPlayback(Button obj)
+        {
+            _host.SetScene(new PlaybackScene(_host, this, _playbackManager));
         }
 
         private void OnPreview(Button obj)
@@ -82,6 +91,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
             _previewButton.Update();
             _submitButton.Update();
+            _playbackButton.Update();
         }
 
         private ShipCommands GetShipCommands(Ship ship)
@@ -99,6 +109,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             _turnStart.Draw(sb);
             _previewButton.Draw(sb);
             _submitButton.Draw(sb);
+            _playbackButton.Draw(sb);
             _popup?.Draw(sb);
             sb.End();
         }

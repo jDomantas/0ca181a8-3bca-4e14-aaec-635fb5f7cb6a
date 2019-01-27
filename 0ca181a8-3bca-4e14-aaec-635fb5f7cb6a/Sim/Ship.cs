@@ -13,6 +13,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public Vector Velocity { get; private set; }
         public double Angle { get; private set; }
         public double RotationSpeed { get; private set; }
+
         public ShipModel Model { get; }
         public bool Alive { get; private set; }
         private bool _leftRunning, _rightRunning;
@@ -126,6 +127,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                 Angle = Angle,
                 RotationSpeed = RotationSpeed,
                 Alive = Alive,
+                _leftRunning = _leftRunning,
+                _rightRunning = _rightRunning
             };
         }
     }
