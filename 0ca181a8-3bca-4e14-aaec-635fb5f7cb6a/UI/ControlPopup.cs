@@ -19,8 +19,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI
         public ControlPopup(Ship ship, int x, int y, int width, int height, ShipCommands startCommands)
         {
             ShipId = ship.Uid;
-            _leftEngineSlider = new HolySlider(x + LabelMargin, y + 10, width - 20 - LabelMargin, 20, startCommands.LeftEngineToggles, 0.5);
-            _rightEngineSlider = new HolySlider(x + LabelMargin, y + 40, width - 20 - LabelMargin, 20, startCommands.RightEngineToggles, 0.5);
+            _leftEngineSlider = new HolySlider(x + LabelMargin, y + 10, width - 20 - LabelMargin, 20, startCommands.LeftEngineToggles, World.MaxEnginesPerTurn / World.TurnLength);
+            _rightEngineSlider = new HolySlider(x + LabelMargin, y + 40, width - 20 - LabelMargin, 20, startCommands.RightEngineToggles, World.MaxEnginesPerTurn / World.TurnLength);
             _x = x;
             _y = y;
             _width = width;
