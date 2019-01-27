@@ -72,10 +72,11 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                     {
                         if ((ship.Position - pos).Length < 30)
                         {
-                            var x = (int)ship.Position.X + 50;
-                            var y = (int)ship.Position.Y - 35;
+                            var x = (int)ship.Position.X;
+                            var y = (int)ship.Position.Y;
+                            (x, y) = PlacePopup(x, y, 400, 162);
 
-                            _popup = new ControlPopup(ship, x, y, 300, 70, GetShipCommands(ship));
+                            _popup = new ControlPopup(ship, x, y, 400, 162, GetShipCommands(ship));
                             break;
                         }
                     }
@@ -94,12 +95,29 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             _playbackButton.Update();
         }
 
+        private (int, int) PlacePopup(int centerX, int centerY, int width, int height)
+        {
+            var x = centerX + 50;
+            var y = centerY - 20;
+            if (x + width + 10 > _host.ScreenWidth)
+            {
+                y = centerY + 50;
+                x = centerX - 20;
+            }
+            if (y + height + 10 > _host.ScreenHeight)
+            {
+                y = centerY - 50 - height;
+            }
+            x = Math.Min(_host.ScreenWidth - width - 10, x);
+            return (x, y);
+        }
+
         private ShipCommands GetShipCommands(Ship ship)
         {
             if (_commands.TryGetValue(ship.Uid, out var commands))
                 return commands;
 
-            _commands[ship.Uid] = new ShipCommands(new List<double>(), new List<double>());
+            _commands[ship.Uid] = new ShipCommands(new List<double>(), new List<double>(), new List<double>());
             return _commands[ship.Uid];
         }
 
