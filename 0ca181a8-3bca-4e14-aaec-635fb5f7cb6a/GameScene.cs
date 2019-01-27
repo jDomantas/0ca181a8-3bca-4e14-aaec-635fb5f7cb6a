@@ -165,11 +165,20 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             var predictionPoints = new Dictionary<Guid, List<Vector>>();
             foreach (var ship in simWorld.Ships) predictionPoints[ship.Uid] = new List<Vector>();
 
+            var shipCheckpoints = new List<Ship>();
+
             var lasers = new List<Tuple<Vector, Vector>>();
 
             for (double time = 0; time < World.TurnLength; time += dt)
             {
                 simWorld.Update(dt, controllers);
+                if(time < 1 && time+dt >= 1 || time < 2 && time+dt >= 2 || time < 3 && time+dt >= 3)
+                {
+                    foreach(var ship in simWorld.Ships)
+                    {
+                        shipCheckpoints.Add(ship.Clone());
+                    }
+                }
                 foreach (var ship in simWorld.Ships)
                 {
                     predictionPoints[ship.Uid].Add(ship.Position/Game1.ScaleHack);
@@ -204,6 +213,11 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             foreach(var laser in lasers)
             {
                 PolygonHitbox.DrawLine(sb, laser.Item1, laser.Item2, Color.Red*0.1f, 2);
+            }
+            foreach (var ship in shipCheckpoints)
+            {
+                ship.Scale(Game1.ScaleHack);
+                ship.Draw(sb);
             }
         }
     }

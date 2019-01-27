@@ -29,5 +29,29 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures
 
             Body?.Draw(sb, pos, angle);
         }
+
+        public void Scale(double s)
+        {
+            Body.Scale(s);
+            LeftEngine.Scale(s);
+            RightEngine.Scale(s);
+            LeftFlame.Scale(s);
+            RightFlame.Scale(s);
+        }
+
+        public ShipModel Clone()
+        {
+            return new ShipModel()
+            {
+                Team = Team,
+                Body = Body.Clone(),
+                LeftEngine = LeftEngine.Clone(),
+                RightEngine = RightEngine.Clone(),
+                LeftFlame = LeftFlame.Clone(),
+                RightFlame = RightFlame.Clone(),
+                HitBox = HitBox,
+                ExplosionAnimation = ExplosionAnimation
+            };
+        }
     }
 }

@@ -181,7 +181,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
         public Ship Clone()
         {
-            return new Ship(Position, Model, Uid)
+            return new Ship(Position, Model.Clone(), Uid)
             {
                 Velocity = Velocity,
                 Angle = Angle,
@@ -191,6 +191,12 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                 _rightRunning = _rightRunning,
                 ShotTimer = ShotTimer,
             };
+        }
+
+        public void Scale(double s)
+        {
+            Model.Scale(s);
+            Position /= s;
         }
     }
 }
