@@ -1,5 +1,6 @@
 ﻿using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures
 {
@@ -11,6 +12,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures
         public TexturePart LeftFlame;
         public TexturePart RightFlame;
         public PolygonHitbox HitBox;
+        public List<Texture2D> ExplosionAnimation;
 
         public void Draw(SpriteBatch sb, Vector pos, float angle, bool leftOn, bool rightOn)
         {

@@ -58,6 +58,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures
                 Animate = true,
             },
             HitBox = PolygonHitbox.EnemyBox,
+            ExplosionAnimation = Resources.BlueExplosion
         };
 
         public static ShipModel RedModel => new ShipModel
@@ -107,6 +108,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures
                 Animate = true,
             },
             HitBox = PolygonHitbox.EnemyBox,
+            ExplosionAnimation = Resources.RedExplosion
         };
     }
 }

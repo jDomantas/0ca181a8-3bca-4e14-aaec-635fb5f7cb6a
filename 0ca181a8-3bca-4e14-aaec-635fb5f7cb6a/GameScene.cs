@@ -109,7 +109,10 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             _turnStart.Draw(sb);
             _previewButton.Draw(sb);
             _submitButton.Draw(sb);
-            _playbackButton.Draw(sb);
+            if(_playbackManager.Frames.Count > 0)
+            {
+                _playbackButton.Draw(sb);
+            }
             _popup?.Draw(sb);
             sb.End();
         }

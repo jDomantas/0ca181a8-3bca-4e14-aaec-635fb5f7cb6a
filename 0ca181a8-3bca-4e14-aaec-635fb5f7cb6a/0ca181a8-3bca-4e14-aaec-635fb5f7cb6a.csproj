@@ -51,6 +51,7 @@
     <Compile Include="PreviewScene.cs" />
     <Compile Include="ShipCommands.cs" />
     <Compile Include="Sim\Controllers\EmptyShipController.cs" />
+    <Compile Include="Sim\Particle.cs" />
     <Compile Include="Sim\PolygonHitbox.cs" />
     <Compile Include="Sim\SimTestScene.cs" />
     <Compile Include="IScene.cs" />

@@ -35,5 +35,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         public static Texture2D BarEmpty;
         public static Texture2D BarFull;
         public static Texture2D BarRed;
+        public static List<Texture2D> BlueExplosion;
+        public static List<Texture2D> RedExplosion;
     }
 }

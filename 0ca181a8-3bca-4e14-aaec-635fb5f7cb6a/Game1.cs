@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Linq;
+
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 {
     class Game1 : Game, ISceneHost
@@ -92,9 +94,17 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             Resources.BarEmpty = Content.Load<Texture2D>("Bottoms/bar_empty");
             Resources.BarFull = Content.Load<Texture2D>("Bottoms/bar_full");
             Resources.BarRed = Content.Load<Texture2D>("Bottoms/bar_red");
+            Resources.BlueExplosion = Enumerable.Range(1, 10)
+                                                .Select(i => "Explosions/blue/" + i)
+                                                .Select(s => Content.Load<Texture2D>(s))
+                                                .ToList();
+            Resources.RedExplosion = Enumerable.Range(1, 10)
+                                                .Select(i => "Explosions/red/" + i)
+                                                .Select(s => Content.Load<Texture2D>(s))
+                                                .ToList();
             var world = new World();
             world.Ships.Add(new Ship(new Vector(100, 100), Models.RedModel));
-            //world.Ships.Add(new Ship(new Vector(400, 150), Models.BlueModel));
+            world.Ships.Add(new Ship(new Vector(400, 150), Models.BlueModel));
             //world.Ships.Add(new Ship(new Vector(150, 400), Models.BlueModel));
 
             world.Planets.Add(new Planet(new Vector(600, 500), 100, 0));

@@ -10,6 +10,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
     {
         public List<Planet> Planets { get; private set; } = new List<Planet>();
         public List<Ship> Ships { get; private set; } = new List<Ship>();
+        public List<Particle> Particles { get; private set; } = new List<Particle>();
 
         public World Clone()
         {
@@ -17,6 +18,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             {
                 Planets = Planets.Select(p => p.Clone()).ToList(),
                 Ships = Ships.Select(s => s.Clone()).ToList(),
+                Particles = Particles.Select(p => p.Clone()).ToList()
             };
         }
 
@@ -33,8 +35,19 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             {
                 if (!Ships[i].Alive)
                 {
+                    Particles.Add(new Particle(Ships[i].Position, Ships[i].Model.ExplosionAnimation));
                     Ships[i] = Ships[Ships.Count - 1];
                     Ships.RemoveAt(Ships.Count - 1);
+                }
+            }
+
+            for(int i = Particles.Count-1; i >= 0; i--)
+            {
+                Particles[i].Update();
+                if(Particles[i].IsFinished)
+                {
+                    Particles[i] = Particles[Particles.Count - 1];
+                    Particles.RemoveAt(Particles.Count - 1);
                 }
             }
         }
@@ -52,6 +65,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
             foreach (var ship in Ships)
                 ship.Draw(sb);
+
+            foreach (var particle in Particles)
+                particle.Draw(sb);
         }
     }
 }
