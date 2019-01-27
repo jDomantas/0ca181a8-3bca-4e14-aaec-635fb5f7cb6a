@@ -115,6 +115,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 "Background/something_back6",
             };
             Resources.Background = Content.Load<Texture2D>(backgroundOptions[new Random().Next(backgroundOptions.Count)]);
+            Resources.RedTurnIndicator = Content.Load<Texture2D>("Bottoms/redturn");
+            Resources.BlueTurnIndicator = Content.Load<Texture2D>("Bottoms/blueturn");
+
             var world = new World(ScreenWidth, ScreenHeight);
             world.Ships.Add(new Ship(new Vector(100, 100), Models.RedModel));
             world.Ships.Add(new Ship(new Vector(400, 150), Models.BlueModel));
