@@ -116,8 +116,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             };
             Resources.Background = Content.Load<Texture2D>(backgroundOptions[new Random().Next(backgroundOptions.Count)]);
             var world = new World(ScreenWidth, ScreenHeight);
-            world.Ships.Add(new Ship(new Vector(100, 100), Models.RedModel));
-            world.Ships.Add(new Ship(new Vector(400, 150), Models.BlueModel));
+            world.Ships.Add(new Ship(1, new Vector(100, 100), Models.RedModel));
+            world.Ships.Add(new Ship(2, new Vector(400, 150), Models.BlueModel));
             //world.Ships.Add(new Ship(new Vector(150, 400), Models.BlueModel));
 
             world.Planets.Add(new Planet(new Vector(600, 500), 100, 0));
@@ -130,7 +130,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
             var playbackManager = new PlaybackManager();
 
-            _currentScene = new GameScene(this, world, playbackManager);
+            //_currentScene = new GameScene(this, world, playbackManager);
+            _currentScene = new HotseatScene(this, world, playbackManager);
         }
         
         protected override void Update(GameTime gameTime)

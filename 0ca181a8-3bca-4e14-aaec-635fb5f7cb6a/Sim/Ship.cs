@@ -10,6 +10,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
     {
         private const double ShotTime = 0.3;
 
+        public int Team { get; }
         public Guid Uid { get; }
         public Vector Position { get; private set; }
         public Vector Velocity { get; private set; }
@@ -22,8 +23,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         private double _leftEngineRemaining, _rightEngineRemaining;
         private double _shotTimer;
 
-        public Ship(Vector position, ShipModel model, Guid? uid = null)
+        public Ship(int team, Vector position, ShipModel model, Guid? uid = null)
         {
+            Team = team;
             Alive = true;
             Uid = uid ?? Guid.NewGuid();
             Model = model;
@@ -181,7 +183,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
         public Ship Clone()
         {
-            return new Ship(Position, Model, Uid)
+            return new Ship(Team, Position, Model, Uid)
             {
                 Velocity = Velocity,
                 Angle = Angle,
