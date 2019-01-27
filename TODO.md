@@ -3,6 +3,6 @@
 * [ ] background?
 * [x] object collisions
 * [x] pretty buttons
-* [ ] submit functionality
+* [x] submit functionality
 * [ ] ship guns
 * [ ] ship health
