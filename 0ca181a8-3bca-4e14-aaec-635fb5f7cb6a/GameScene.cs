@@ -19,17 +19,18 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         private readonly Button _submitButton;
         private readonly Button _playbackButton;
         private readonly PlaybackManager _playbackManager;
+        private readonly Texture2D _turnIndicator;
         private ControlPopup _popup;
         private bool _oldPressed;
         private Action<Dictionary<Guid, ShipCommands>> _onSubmit;
 
-        public GameScene(ISceneHost host, World world, PlaybackManager playbackManager, Action<Dictionary<Guid, ShipCommands>> onSubmit)
+        public GameScene(ISceneHost host, World world, PlaybackManager playbackManager, Texture2D turnIndicator, Action<Dictionary<Guid, ShipCommands>> onSubmit)
         {
             _host = host;
             _turnStart = world;
             _onSubmit = onSubmit;
             _playbackManager = playbackManager;
-
+            this._turnIndicator = turnIndicator;
             _commands = new Dictionary<Guid, ShipCommands>();
 
             _submitButton = new Button(Resources.SubmitButton, Resources.SubmitButtonHover, host.ScreenWidth-100-10, host.ScreenHeight - 70, 100);
@@ -136,6 +137,13 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             {
                 _playbackButton.Draw(sb);
             }
+            int indicatorWidth = 200;
+            int indicatorHeight = indicatorWidth * _turnIndicator.Height / _turnIndicator.Width;
+            sb.Draw(
+                _turnIndicator,
+                new Rectangle(_host.ScreenWidth - indicatorWidth - 10, 10, indicatorWidth, indicatorHeight),
+                Color.White
+            );
             _popup?.Draw(sb);
             sb.End();
         }

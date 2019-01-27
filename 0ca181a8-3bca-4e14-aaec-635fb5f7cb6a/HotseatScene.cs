@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim;
 using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim.Controllers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
@@ -22,9 +23,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
         public void Update()
         {
-            _host.SetScene(new GameScene(_host, _world.Clone(), _playbackManager, commands =>
+            _host.SetScene(new GameScene(_host, _world.Clone(), _playbackManager, Resources.BlueTurnIndicator, commands =>
             {
-                _host.SetScene(new GameScene(_host, _world.Clone(), _playbackManager, commands2 =>
+                _host.SetScene(new GameScene(_host, _world.Clone(), _playbackManager, Resources.RedTurnIndicator, commands2 =>
                 {
                     var com = new Dictionary<Guid, IShipController>();
                     foreach (var c in commands)
