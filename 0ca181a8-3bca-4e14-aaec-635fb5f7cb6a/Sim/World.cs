@@ -72,6 +72,10 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
         public void Draw(SpriteBatch sb)
         {
+            Game1.GlobalGraphicsDevice.SetRenderTarget(Game1.WorldRenderTarget);
+            Game1.GlobalGraphicsDevice.Clear(new Microsoft.Xna.Framework.Color(0, 0, 0, 0));
+            sb.Begin();
+
             foreach (var planet in Planets)
                 planet.Draw(sb);
 
@@ -80,6 +84,10 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
             foreach (var particle in Particles)
                 particle.Draw(sb);
+
+            sb.End();
+
+            Game1.GlobalGraphicsDevice.SetRenderTarget(null);
         }
     }
 }

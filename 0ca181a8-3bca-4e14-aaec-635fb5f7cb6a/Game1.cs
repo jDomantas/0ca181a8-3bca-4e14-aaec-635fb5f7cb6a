@@ -20,7 +20,10 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         public int ScreenWidth => 1600;
         public int ScreenHeight => 900;
 
-        public double ScaleHack = 2;
+        public const double ScaleHack = 1.5;
+        public static GraphicsDevice GlobalGraphicsDevice;
+        public static GraphicsDeviceManager GlobalGraphicsDeviceManager;
+        public static RenderTarget2D WorldRenderTarget;
 
 
         public Game1()
@@ -46,6 +49,10 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            GlobalGraphicsDevice = GraphicsDevice;
+            WorldRenderTarget = new RenderTarget2D(GraphicsDevice, (int)(ScreenWidth * ScaleHack), (int)(ScreenHeight * ScaleHack));
+            GlobalGraphicsDeviceManager = _graphics;
 
             Resources.Pixel = new Texture2D(GraphicsDevice, 1, 1);
             Resources.Pixel.SetData(new[] { Color.White });
@@ -160,17 +167,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
-
-
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(
-                Resources.Background,
-                new Rectangle(0, 0, ScreenWidth, ScreenHeight),
-                new Rectangle(0, 0, Resources.Background.Width, Resources.Background.Width*9/16),
-                Color.LightGray);
-            _spriteBatch.End();
-
+            
             _currentScene.Draw(_spriteBatch);
 
             base.Draw(gameTime);

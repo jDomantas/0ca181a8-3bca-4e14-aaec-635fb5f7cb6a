@@ -37,8 +37,14 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Begin();
             _playbackManager.Frames[_currentFrame].Draw(sb);
+            sb.Begin();
+            sb.Draw(
+                Resources.Background,
+                new Rectangle(0, 0, 1600, 900),
+                new Rectangle(0, 0, Resources.Background.Width, Resources.Background.Width * 9 / 16),
+                Color.LightGray);
+            sb.Draw(Game1.WorldRenderTarget, new Rectangle(0, 0, 1600, 900), Color.White);
             int barWidth = Resources.BarEmpty.Width / Resources.BarEmpty.Height * BarHeight;
             double fraction = (double)_currentFrame / _playbackManager.Frames.Count;
             sb.Draw(

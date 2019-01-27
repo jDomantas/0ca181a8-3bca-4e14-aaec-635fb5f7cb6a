@@ -1,5 +1,6 @@
 ﻿using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim.Controllers;
 using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -32,8 +33,9 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Begin();
             _world.Draw(sb);
+            sb.Begin();
+            sb.Draw(Game1.WorldRenderTarget, new Rectangle(0, 0, 1600, 900), Color.White);
             sb.End();
         }
     }
