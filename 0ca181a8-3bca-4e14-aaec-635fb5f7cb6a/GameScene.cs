@@ -4,6 +4,7 @@ using System.Linq;
 using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim;
 using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim.Controllers;
 using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.UI;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -124,6 +125,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         public void Draw(SpriteBatch sb)
         {
             sb.Begin();
+            DrawPrediction(sb);
             _turnStart.Draw(sb);
             _previewButton.Draw(sb);
             _submitButton.Draw(sb);
@@ -133,6 +135,40 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             }
             _popup?.Draw(sb);
             sb.End();
+        }
+
+        private void DrawPrediction(SpriteBatch sb)
+        {
+            var simWorld = _turnStart.Clone();
+            double dt = 1 / 60.0;
+            if(_popup != null) _commands[_popup.ShipId] = _popup.CurrentCommands();
+            foreach (var ship in simWorld.Ships) GetShipCommands(ship);
+            var controllers = _commands.ToDictionary(c => c.Key, c => (IShipController)new PlayerShipController(c.Value));
+            for (double time = 0; time < World.TurnLength; time += dt)
+            {
+                var prevShips = simWorld.Ships.Select(s => s.Clone()).ToList();
+                simWorld.Update(dt, controllers);
+                foreach(var oldShip in prevShips)
+                {
+                    if (simWorld.Ships.All(s => s.Uid != oldShip.Uid))
+                    {
+                        // oldShip died
+                        sb.Draw(
+                            Resources.Pixel,
+                            new Rectangle((int)oldShip.Position.X, (int)oldShip.Position.Y, 5, 5),
+                            Color.Red
+                        );
+                    }
+                }
+                foreach (var ship in simWorld.Ships)
+                {
+                    sb.Draw(
+                        Resources.Pixel,
+                        new Rectangle((int)ship.Position.X, (int)ship.Position.Y, 5, 5),
+                        Color.White
+                    );
+                }
+            }
         }
     }
 }
