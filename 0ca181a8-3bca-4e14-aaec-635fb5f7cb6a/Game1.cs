@@ -3,6 +3,7 @@ using _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -102,6 +103,16 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                                                 .Select(i => "Explosions/red/" + i)
                                                 .Select(s => Content.Load<Texture2D>(s))
                                                 .ToList();
+            var backgroundOptions = new List<string>()
+            {
+                "Background/something_right1",
+                "Background/something_left2",
+                "Background/something_top3",
+                "Background/something_bottom4",
+                "Background/something_front5",
+                "Background/something_back6",
+            };
+            Resources.Background = Content.Load<Texture2D>(backgroundOptions[new Random().Next(backgroundOptions.Count)]);
             var world = new World(ScreenWidth, ScreenHeight);
             world.Ships.Add(new Ship(new Vector(100, 100), Models.RedModel));
             world.Ships.Add(new Ship(new Vector(400, 150), Models.BlueModel));
@@ -135,6 +146,14 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(
+                Resources.Background,
+                new Rectangle(0, 0, ScreenWidth, ScreenHeight),
+                new Rectangle(0, 0, Resources.Background.Width, Resources.Background.Width*9/16),
+                Color.Gray);
+            _spriteBatch.End();
 
             _currentScene.Draw(_spriteBatch);
 
