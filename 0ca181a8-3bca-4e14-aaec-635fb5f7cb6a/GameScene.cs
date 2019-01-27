@@ -165,12 +165,23 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             var predictionPoints = new Dictionary<Guid, List<Vector>>();
             foreach (var ship in simWorld.Ships) predictionPoints[ship.Uid] = new List<Vector>();
 
+            var lasers = new List<Tuple<Vector, Vector>>();
+
             for (double time = 0; time < World.TurnLength; time += dt)
             {
                 simWorld.Update(dt, controllers);
                 foreach (var ship in simWorld.Ships)
                 {
                     predictionPoints[ship.Uid].Add(ship.Position/Game1.ScaleHack);
+                    if(ship.ShotTimer > 0)
+                    {
+                        var len = ship.LazerLength();
+                        var start = ship.Position;
+                        var d = Vector.AtAngle(ship.Angle) * len;
+                        var angle = Math.Atan2(d.Y, d.X);
+                        var end = d + start;
+                        lasers.Add(new Tuple<Vector, Vector>(start/Game1.ScaleHack, end/Game1.ScaleHack));
+                    }
                 }
             }
             foreach(var entry in predictionPoints)
@@ -189,6 +200,10 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                         Color.Red
                     );
                 }
+            }
+            foreach(var laser in lasers)
+            {
+                PolygonHitbox.DrawLine(sb, laser.Item1, laser.Item2, Color.Red*0.1f, 2);
             }
         }
     }
