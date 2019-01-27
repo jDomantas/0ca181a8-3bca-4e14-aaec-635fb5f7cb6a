@@ -35,7 +35,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             _previewButton = new Button(Resources.PlayButton, Resources.PlayButtonHover, host.ScreenWidth-100-10-100-10, host.ScreenHeight-70, 100);
             _previewButton.OnMouseUp += OnPreview;
 
-            _playbackButton = new Button(Resources.PlayButton, Resources.PlayButtonHover, host.ScreenWidth-100-10-100-10-100-10, host.ScreenHeight - 70, 100);
+            _playbackButton = new Button(Resources.ReplayButton, Resources.ReplayButtonHover, host.ScreenWidth-100-10-100-10-100-10, host.ScreenHeight - 70, 100);
             _playbackButton.OnMouseUp += OnPlayback;
         }
 
