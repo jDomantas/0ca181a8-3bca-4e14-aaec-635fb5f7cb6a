@@ -11,6 +11,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
     class PlaybackScene : IScene
     {
         private const int Margin = 50;
+        private const int BarHeight = 50;
         private readonly ISceneHost _host;
         private readonly IScene _previousScene;
         private readonly PlaybackManager _playbackManager;
@@ -38,16 +39,16 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         {
             sb.Begin();
             _playbackManager.Frames[_currentFrame].Draw(sb);
-            int w = _host.ScreenWidth - 2*Margin;
+            int barWidth = Resources.BarEmpty.Width / Resources.BarEmpty.Height * BarHeight;
             double fraction = (double)_currentFrame / _playbackManager.Frames.Count;
             sb.Draw(
-                Resources.PlayButton,
-                new Rectangle(Margin, _host.ScreenHeight - 100, w, 50),
+                Resources.BarEmpty,
+                new Rectangle(Margin, _host.ScreenHeight - BarHeight - Margin, barWidth, BarHeight),
                 Color.White);
             sb.Draw(
-                Resources.PlayButtonHover,
-                new Rectangle(Margin, _host.ScreenHeight - 100, (int)(w*fraction), 50),
-                new Rectangle(0, 0, (int)(fraction * Resources.PlayButtonHover.Width), Resources.PlayButton.Height),
+                Resources.BarFull,
+                new Rectangle(Margin, _host.ScreenHeight - BarHeight - Margin, (int)(barWidth*fraction), BarHeight),
+                new Rectangle(0, 0, (int)(fraction * Resources.BarFull.Width), Resources.BarFull.Height),
                 Color.White);
             sb.End();
         }
