@@ -16,13 +16,15 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         private readonly Dictionary<Guid, ShipCommands> _commands;
         private readonly Button _previewButton;
         private readonly Button _submitButton;
+        private readonly PlaybackManager _playbackManager;
         private ControlPopup _popup;
         private bool _oldPressed;
         
-        public GameScene(ISceneHost host, World world)
+        public GameScene(ISceneHost host, World world, PlaybackManager playbackManager)
         {
             _host = host;
             _turnStart = world;
+            _playbackManager = playbackManager;
 
             _commands = new Dictionary<Guid, ShipCommands>();
 
@@ -42,7 +44,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         private void OnSubmit(Button obj)
         {
             var controllers = _commands.ToDictionary(c => c.Key, c => (IShipController)new PlayerShipController(c.Value));
-            _host.SetScene(new PreviewScene(_host, this, _turnStart, controllers));
+            _host.SetScene(new SubmitScene(_host, this, _turnStart, controllers, _playbackManager));
+            _commands.Clear();
             // save snapshot
         }
 

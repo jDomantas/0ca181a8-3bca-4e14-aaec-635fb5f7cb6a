@@ -10,7 +10,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
     {
         private readonly ISceneHost _host;
         private readonly IScene _previousScene;
-        private readonly World _world;
+        protected readonly World _world;
         private readonly Dictionary<Guid, IShipController> _controllers;
         private double _timePassed;
 
@@ -23,7 +23,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             _timePassed = 0;
         }
 
-        public void Update()
+        public virtual void Update()
         {
             if (_timePassed >= 3)
             {
