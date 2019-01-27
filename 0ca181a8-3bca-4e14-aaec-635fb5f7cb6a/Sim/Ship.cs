@@ -52,6 +52,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             foreach (var planet in world.Planets)
                 if (Model.HitBox.IntersectsPlanet(planet, Position, Angle))
                     Kill();
+            if (Position.X < 0 || Position.X >= world.ScreenWidth || Position.Y < 0 || Position.Y >= world.ScreenHeight) Kill();
         }
 
         public void EndTurn()

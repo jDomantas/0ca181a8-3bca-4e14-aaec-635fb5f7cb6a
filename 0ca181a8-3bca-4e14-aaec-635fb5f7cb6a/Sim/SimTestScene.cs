@@ -13,7 +13,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 
         public SimTestScene()
         {
-            _world = new World();
+            _world = new World(1600, 900);
             // _world.Planets.Add(new Planet(new Vector(300, 400), 80));
             // _world.Planets.Add(new Planet(new Vector(600, 200), 60));
 

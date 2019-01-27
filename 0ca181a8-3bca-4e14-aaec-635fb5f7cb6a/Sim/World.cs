@@ -11,10 +11,18 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public List<Planet> Planets { get; private set; } = new List<Planet>();
         public List<Ship> Ships { get; private set; } = new List<Ship>();
         public List<Particle> Particles { get; private set; } = new List<Particle>();
+        public int ScreenWidth { get; }
+        public int ScreenHeight { get; }
+
+        public World(int screenWidth, int screenHeight)
+        {
+            ScreenWidth = screenWidth;
+            ScreenHeight = screenHeight;
+        }
 
         public World Clone()
         {
-            return new World()
+            return new World(ScreenWidth, ScreenHeight)
             {
                 Planets = Planets.Select(p => p.Clone()).ToList(),
                 Ships = Ships.Select(s => s.Clone()).ToList(),

@@ -102,7 +102,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                                                 .Select(i => "Explosions/red/" + i)
                                                 .Select(s => Content.Load<Texture2D>(s))
                                                 .ToList();
-            var world = new World();
+            var world = new World(ScreenWidth, ScreenHeight);
             world.Ships.Add(new Ship(new Vector(100, 100), Models.RedModel));
             world.Ships.Add(new Ship(new Vector(400, 150), Models.BlueModel));
             //world.Ships.Add(new Ship(new Vector(150, 400), Models.BlueModel));
