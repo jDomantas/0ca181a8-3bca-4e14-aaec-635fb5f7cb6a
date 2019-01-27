@@ -172,7 +172,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                         // oldShip died
                         sb.Draw(
                             Resources.Pixel,
-                            new Rectangle((int)oldShip.Position.X, (int)oldShip.Position.Y, 5, 5),
+                            new Rectangle((int)(oldShip.Position.X/Game1.ScaleHack), (int)(oldShip.Position.Y / Game1.ScaleHack), 5, 5),
                             Color.Red
                         );
                     }
@@ -181,7 +181,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
                 {
                     sb.Draw(
                         Resources.Pixel,
-                        new Rectangle((int)ship.Position.X, (int)ship.Position.Y, 5, 5),
+                        new Rectangle((int)(ship.Position.X / Game1.ScaleHack), (int)(ship.Position.Y / Game1.ScaleHack), 5, 5),
                         Color.White
                     );
                 }
