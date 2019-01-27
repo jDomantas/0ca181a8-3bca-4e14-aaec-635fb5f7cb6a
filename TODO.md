@@ -1,8 +1,8 @@
-* [ ] textures on ships
-* [ ] textures on planets
+* [x] textures on ships
+* [x] textures on planets
 * [ ] background?
-* [ ] object collisions
-* [ ] pretty buttons
+* [x] object collisions
+* [x] pretty buttons
 * [ ] submit functionality
 * [ ] ship guns
 * [ ] ship health

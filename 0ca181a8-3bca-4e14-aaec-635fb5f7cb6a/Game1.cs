@@ -81,6 +81,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             };
             Resources.PlayButton = Content.Load<Texture2D>("Bottoms/play1");
             Resources.PlayButtonHover = Content.Load<Texture2D>("Bottoms/play2");
+            Resources.SubmitButton = Content.Load<Texture2D>("Bottoms/sumbit1");
+            Resources.SubmitButtonHover = Content.Load<Texture2D>("Bottoms/sumbit2");
             Resources.Slider = Content.Load<Texture2D>("Bottoms/slider");
             Resources.SliderHover = Content.Load<Texture2D>("Bottoms/slider_highlight");
             Resources.UIBackground = Content.Load<Texture2D>("Bottoms/ui_base");

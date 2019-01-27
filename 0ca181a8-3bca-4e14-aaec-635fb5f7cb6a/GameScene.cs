@@ -15,6 +15,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
         private readonly World _turnStart;
         private readonly Dictionary<Guid, ShipCommands> _commands;
         private readonly Button _previewButton;
+        private readonly Button _submitButton;
         private ControlPopup _popup;
         private bool _oldPressed;
         
@@ -27,12 +28,22 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
             _previewButton = new Button(Resources.PlayButton, Resources.PlayButtonHover, 5, 5, 100);
             _previewButton.OnMouseUp += OnPreview;
+
+            _submitButton = new Button(Resources.SubmitButton, Resources.SubmitButtonHover, 110, 5, 100);
+            _submitButton.OnMouseUp += OnSubmit;
         }
 
         private void OnPreview(Button obj)
         {
             var controllers = _commands.ToDictionary(c => c.Key, c => (IShipController)new PlayerShipController(c.Value));
             _host.SetScene(new PreviewScene(_host, this, _turnStart.Clone(), controllers));
+        }
+
+        private void OnSubmit(Button obj)
+        {
+            var controllers = _commands.ToDictionary(c => c.Key, c => (IShipController)new PlayerShipController(c.Value));
+            _host.SetScene(new PreviewScene(_host, this, _turnStart, controllers));
+            // save snapshot
         }
 
         public void Update()
@@ -67,6 +78,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             _oldPressed = mouse.LeftButton == ButtonState.Pressed;
 
             _previewButton.Update();
+            _submitButton.Update();
         }
 
         private ShipCommands GetShipCommands(Ship ship)
@@ -83,6 +95,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             sb.Begin();
             _turnStart.Draw(sb);
             _previewButton.Draw(sb);
+            _submitButton.Draw(sb);
             _popup?.Draw(sb);
             sb.End();
         }
