@@ -8,6 +8,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 {
     class Ship
     {
+        private const double ShotTime = 0.3;
+
         public Guid Uid { get; }
         public Vector Position { get; private set; }
         public Vector Velocity { get; private set; }
@@ -18,6 +20,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public bool Alive { get; private set; }
         private bool _leftRunning, _rightRunning;
         private double _leftEngineRemaining, _rightEngineRemaining;
+        private double _shotTimer;
 
         public Ship(Vector position, ShipModel model, Guid? uid = null)
         {
@@ -29,6 +32,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             Angle = 0;
             RotationSpeed = 0;
             _leftEngineRemaining = _rightEngineRemaining = World.MaxEnginesPerTurn;
+            _shotTimer = 0;
         }
 
         public void Update(World world, double dt, IShipController controller)
@@ -44,6 +48,12 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             Angle += RotationSpeed * dt;
             RotationSpeed /= Math.Exp(dt * 4);
 
+            if (_shotTimer > 0)
+            {
+                _shotTimer -= dt;
+                FireLazer(world);
+            }
+
             foreach (var ship in world.Ships)
                 if (!ReferenceEquals(ship, this) && Model.HitBox.IntersectsOther(ship.Model.HitBox, Position, Angle, ship.Position, ship.Angle))
                 {
@@ -55,6 +65,27 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                 if (Model.HitBox.IntersectsPlanet(planet, Position, Angle))
                     Kill();
             if (Position.X < 0 || Position.X >= world.ScreenWidth || Position.Y < 0 || Position.Y >= world.ScreenHeight) Kill();
+        }
+
+        private void FireLazer(World world)
+        {
+            var length = LazerLength();
+            var angle = Vector.AtAngle(Angle);
+            foreach (var ship in world.Ships)
+            {
+                if (ReferenceEquals(ship, this))
+                    continue;
+                var dist = ship.Model.HitBox.IntersectRay(ship.Position, ship.Angle, Position, angle);
+                if (dist < length)
+                    ship.Kill();
+            }
+        }
+
+        private double LazerLength()
+        {
+            if (_shotTimer < 0) return 0;
+            var maxLength = 300;
+            return Math.Min(maxLength, (ShotTime - _shotTimer) * 4000);
         }
 
         public void EndTurn()
@@ -102,12 +133,17 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                 forwardSpeed += 0.5;
                 _rightEngineRemaining -= dt;
             }
+            if (controller.GunEnabled)
+            {
+                _shotTimer = ShotTime;
+            }
 
             Velocity += forward * forwardSpeed * EnginePower;
         }
 
         public void Draw(SpriteBatch sb)
         {
+            if (_shotTimer > 0) DrawLazer(sb);
             Model.Draw(sb, Position, (float)Angle, _leftRunning, _rightRunning);
 
             if (Microsoft.Xna.Framework.Input.Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Space))
@@ -118,6 +154,24 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                     Color.White);
                 Model.HitBox.DrawDebug(sb, Position, Angle);
             }
+        }
+
+        private void DrawLazer(SpriteBatch sb)
+        {
+            var len = LazerLength();
+            var width = _shotTimer * 12 + 1;
+            var start = Position;
+            var d = Vector.AtAngle(Angle) * len;
+            var angle = Math.Atan2(d.Y, d.X);
+            sb.Draw(
+                Resources.Pixel,
+                new Rectangle((int)Math.Round(start.X), (int)Math.Round(start.Y), (int)Math.Round(d.Length), (int)Math.Ceiling(width)),
+                null,
+                Color.Red * (float)(_shotTimer + 0.5),
+                (float)angle,
+                new Vector2(0, 0.5f),
+                SpriteEffects.None,
+                0);
         }
 
         private void Kill()
@@ -134,7 +188,8 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                 RotationSpeed = RotationSpeed,
                 Alive = Alive,
                 _leftRunning = _leftRunning,
-                _rightRunning = _rightRunning
+                _rightRunning = _rightRunning,
+                _shotTimer = _shotTimer,
             };
         }
     }
