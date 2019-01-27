@@ -70,15 +70,15 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
             var mouse = Mouse.GetState();
             if (mouse.LeftButton == ButtonState.Pressed && !_oldPressed)
             {
-                var pos = new Vector(mouse.X, mouse.Y);
+                var pos = new Vector(mouse.X * Game1.ScaleHack, mouse.Y * Game1.ScaleHack);
                 if (_popup == null)
                 {
                     foreach (var ship in _turnStart.Ships)
                     {
                         if ((ship.Position - pos).Length < 30)
                         {
-                            var x = (int)ship.Position.X;
-                            var y = (int)ship.Position.Y;
+                            var x = (int)(ship.Position.X / Game1.ScaleHack);
+                            var y = (int)(ship.Position.Y / Game1.ScaleHack);
                             (x, y) = PlacePopup(x, y, 400, 162);
 
                             _popup = new ControlPopup(ship, x, y, 400, 162, GetShipCommands(ship));
@@ -128,9 +128,15 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Begin();
-            DrawPrediction(sb);
             _turnStart.Draw(sb);
+            sb.Begin();
+            sb.Draw(
+                Resources.Background,
+                new Rectangle(0, 0, 1600, 900),
+                new Rectangle(0, 0, Resources.Background.Width, Resources.Background.Width * 9 / 16),
+                Color.LightGray);
+            DrawPrediction(sb);
+            sb.Draw(Game1.WorldRenderTarget, new Rectangle(0, 0, 1600, 900), Color.White);
             _previewButton.Draw(sb);
             _submitButton.Draw(sb);
             if(_playbackManager.Frames.Count > 0)
