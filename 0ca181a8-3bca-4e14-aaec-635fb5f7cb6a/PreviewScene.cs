@@ -8,11 +8,11 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 {
     class PreviewScene : IScene
     {
-        private readonly ISceneHost _host;
-        private readonly IScene _previousScene;
+        protected readonly ISceneHost _host;
+        protected readonly IScene _previousScene;
         protected readonly World _world;
-        private readonly Dictionary<Guid, IShipController> _controllers;
-        private double _timePassed;
+        protected readonly Dictionary<Guid, IShipController> _controllers;
+        protected double _timePassed;
 
         public PreviewScene(ISceneHost host, IScene previousScene, World world, Dictionary<Guid, IShipController> controllers)
         {
@@ -25,7 +25,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a
 
         public virtual void Update()
         {
-            if (_timePassed >= 3)
+            if (_timePassed >= World.TurnLength)
             {
                 _host.SetScene(_previousScene);
                 return;

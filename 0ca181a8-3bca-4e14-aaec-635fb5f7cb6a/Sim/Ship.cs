@@ -17,6 +17,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public ShipModel Model { get; }
         public bool Alive { get; private set; }
         private bool _leftRunning, _rightRunning;
+        private double _leftEngineRemaining, _rightEngineRemaining;
 
         public Ship(Vector position, ShipModel model, Guid? uid = null)
         {
@@ -27,6 +28,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             Velocity = Vector.Zero;
             Angle = 0;
             RotationSpeed = 0;
+            _leftEngineRemaining = _rightEngineRemaining = World.MaxEnginesPerTurn;
         }
 
         public void Update(World world, double dt, IShipController controller)
@@ -57,6 +59,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
         public void EndTurn()
         {
             _leftRunning = _rightRunning = false;
+            _leftEngineRemaining = _rightEngineRemaining = World.MaxEnginesPerTurn;
         }
 
         private void AddGravity(World world, double dt)
@@ -84,17 +87,19 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             var forward = Vector.AtAngle(Angle);
             var forwardSpeed = 0.0;
 
-            if (controller.LeftEngineEnabled)
+            if (controller.LeftEngineEnabled && _leftEngineRemaining > 0)
             {
                 _rightRunning = true;
                 RotationSpeed -= RotationPower * dt;
                 forwardSpeed += 0.5;
+                _leftEngineRemaining -= dt;
             }
-            if (controller.RightEngineEnabled)
+            if (controller.RightEngineEnabled && _rightEngineRemaining > 0)
             {
                 _leftRunning = true;
                 RotationSpeed += RotationPower * dt;
                 forwardSpeed += 0.5;
+                _rightEngineRemaining -= dt;
             }
 
             Velocity += forward * forwardSpeed * EnginePower;

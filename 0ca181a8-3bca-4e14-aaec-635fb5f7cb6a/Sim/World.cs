@@ -8,6 +8,10 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
 {
     class World
     {
+        public const double TurnLength = 3;
+        public const double MaxEnginesPerTurn = 1.2;
+        public const int MaxShotsPerTurn = 1;
+
         public List<Planet> Planets { get; private set; } = new List<Planet>();
         public List<Ship> Ships { get; private set; } = new List<Ship>();
 
