@@ -46,7 +46,7 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
             Position += Velocity * dt;
 
             Angle += RotationSpeed * dt;
-            RotationSpeed /= Math.Exp(dt * 4);
+            RotationSpeed /= Math.Exp(dt * 3);
 
             if (_shotTimer > 0)
             {
@@ -107,14 +107,14 @@ namespace _0ca181a8_3bca_4e14_aaec_635fb5f7cb6a.Sim
                 total += delta.Normalized / delta.LengthSquared;
             }
 
-            Velocity += total * 10000000 * dt;
-            Velocity /= Math.Exp(dt / 2);
+            Velocity += total * 8000000 * dt;
+            Velocity /= Math.Exp(dt / 1.4);
         }
 
         private void ApplyInput(IShipController controller, double dt)
         {
-            const double RotationPower = 10;
-            const double EnginePower = 10;
+            const double RotationPower = 14;
+            const double EnginePower = 7;
 
             var forward = Vector.AtAngle(Angle);
             var forwardSpeed = 0.0;
